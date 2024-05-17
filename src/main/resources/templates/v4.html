@@ -1,0 +1,655 @@
+<html lang="zh-CN"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
+    <title>Majestic Admin - Simple Bootstrap 4 Dashboard template.</title>
+
+    <meta name="author" content="Bootstrap 中文网">
+
+
+
+    <style>
+        .bi {
+            display: inline-block;
+            vertical-align: -.125em;
+        }
+    </style>
+
+    <script src="https://hm.baidu.com/hm.js?668e545eeaf5292f68346197e68d738f"></script><script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?668e545eeaf5292f68346197e68d738f";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <style>
+        .iframe-preview {
+            top: 80px;
+            height: calc(100% - 80px);
+        }
+
+        .iframe-preview-mobile {
+            width: 375px !important;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .navbar {
+            height: 80px;
+            border-bottom: 6px solid var(--bs-primary) !important;
+        }
+    </style>
+    <script src="https://fastly.jsdelivr.net/npm/alpinejs@3.2.1/dist/cdn.min.js" defer=""></script>
+    <style type="text/css">#_copy{align-items:center;background:#4494d5;border-radius:3px;color:#fff;cursor:pointer;display:flex;font-size:13px;height:30px;justify-content:center;position:absolute;width:60px;z-index:1000}#select-tooltip,#sfModal,.modal-backdrop,div[id^=reader-helper]{display:none!important}.modal-open{overflow:auto!important}._sf_adjust_body{padding-right:0!important}.enable_copy_btns_div{position:fixed;width:154px;left:10px;top:45%;background:#e7f1ff;border:2px solid #4595d5;font-weight:600;border-radius:2px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;z-index:5000}.enable_copy_btns_logo{width:100%;background:#4595d5;text-align:center;font-size:12px;color:#e7f1ff;line-height:30px;height:30px}.enable_copy_btns_btn{display:block;width:128px;height:28px;background:#7f5711;border-radius:4px;color:#fff;font-size:12px;border:0;outline:0;margin:8px auto;font-weight:700;cursor:pointer;opacity:.9}.enable_copy_btns_btn:hover{opacity:.8}.enable_copy_btns_btn:active{opacity:1}</style></head>
+<body >
+<html lang="en"><head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Majestic Admin</title>
+
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="https://majestic.bootmb.com/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://majestic.bootmb.com/vendors/base/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="https://majestic.bootmb.com/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="https://majestic.bootmb.com/css/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="https://majestic.bootmb.com/images/favicon.png">
+    <style type="text/css">/* Chart.js */
+    @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="navbar-brand-wrapper d-flex justify-content-center">
+            <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
+                <a class="navbar-brand brand-logo" href="index.html"><h2>智慧养老</h2></a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"></a>
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="mdi mdi-sort-variant"></span>
+                </button>
+            </div>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+            <ul class="navbar-nav mr-lg-4 w-100">
+                <li class="nav-item nav-search d-none d-lg-block w-100">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                <span class="input-group-text" id="search">
+                  <i class="mdi mdi-magnify"></i>
+                </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Search now" aria-label="search" aria-describedby="search">
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item dropdown mr-1">
+                    <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
+                        <i class="mdi mdi-message-text mx-0"></i>
+                        <span class="count"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
+                        <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+                        <a class="dropdown-item">
+                            <div class="item-thumbnail">
+                                <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="item-content flex-grow">
+                                <h6 class="ellipsis font-weight-normal">David Grey
+                                </h6>
+                                <p class="font-weight-light small-text text-muted mb-0">
+                                    The meeting is cancelled
+                                </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="item-thumbnail">
+                                <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="item-content flex-grow">
+                                <h6 class="ellipsis font-weight-normal">Tim Cook
+                                </h6>
+                                <p class="font-weight-light small-text text-muted mb-0">
+                                    New product launch
+                                </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="item-thumbnail">
+                                <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="item-content flex-grow">
+                                <h6 class="ellipsis font-weight-normal"> Johnson
+                                </h6>
+                                <p class="font-weight-light small-text text-muted mb-0">
+                                    Upcoming board meeting
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown mr-4">
+                    <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown" id="notificationDropdown" href="#" data-toggle="dropdown">
+                        <i class="mdi mdi-bell mx-0"></i>
+                        <span class="count"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+                        <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                        <a class="dropdown-item">
+                            <div class="item-thumbnail">
+                                <div class="item-icon bg-success">
+                                    <i class="mdi mdi-information mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h6 class="font-weight-normal">Application Error</h6>
+                                <p class="font-weight-light small-text mb-0 text-muted">
+                                    Just now
+                                </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="item-thumbnail">
+                                <div class="item-icon bg-warning">
+                                    <i class="mdi mdi-settings mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h6 class="font-weight-normal">Settings</h6>
+                                <p class="font-weight-light small-text mb-0 text-muted">
+                                    Private message
+                                </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item">
+                            <div class="item-thumbnail">
+                                <div class="item-icon bg-info">
+                                    <i class="mdi mdi-account-box mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h6 class="font-weight-normal">New user registration</h6>
+                                <p class="font-weight-light small-text mb-0 text-muted">
+                                    2 days ago
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item nav-profile dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                        <img src="images/faces/face5.jpg" alt="profile">
+                        <span class="nav-profile-name">Louis Barnett</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item">
+                            <i class="mdi mdi-settings text-primary"></i>
+                            Settings
+                        </a>
+                        <a class="dropdown-item">
+                            <i class="mdi mdi-logout text-primary"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">
+                        <i class="mdi mdi-home menu-icon"></i>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <i class="mdi mdi-circle-outline menu-icon"></i>
+                        <span class="menu-title">UI Elements</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/forms/basic_elements.html">
+                        <i class="mdi mdi-view-headline menu-icon"></i>
+                        <span class="menu-title">Form elements</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/charts/chartjs.html">
+                        <i class="mdi mdi-chart-pie menu-icon"></i>
+                        <span class="menu-title">Charts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/tables/basic-table.html">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">Tables</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/icons/mdi.html">
+                        <i class="mdi mdi-emoticon menu-icon"></i>
+                        <span class="menu-title">Icons</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                        <i class="mdi mdi-account menu-icon"></i>
+                        <span class="menu-title">User Pages</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="auth">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="documentation/documentation.html">
+                        <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+                        <span class="menu-title">Documentation</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+
+                <div class="row">
+                    <div class="col-md-12 grid-margin">
+                        <div class="d-flex justify-content-between flex-wrap">
+                            <div class="d-flex align-items-end flex-wrap">
+                                <div class="mr-md-3 mr-xl-5">
+                                    <h2>Welcome back,</h2>
+                                    <p class="mb-md-0">Your analytics dashboard template.</p>
+                                </div>
+                                <div class="d-flex">
+                                    <i class="mdi mdi-home text-muted hover-cursor"></i>
+                                    <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
+                                    <p class="text-primary mb-0 hover-cursor">Analytics</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-end flex-wrap">
+                                <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
+                                    <i class="mdi mdi-download text-muted"></i>
+                                </button>
+                                <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
+                                    <i class="mdi mdi-clock-outline text-muted"></i>
+                                </button>
+                                <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
+                                    <i class="mdi mdi-plus text-muted"></i>
+                                </button>
+                                <button class="btn btn-primary mt-2 mt-xl-0">Generate report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex" id="proBanner">
+                    <div class="col-md-12 grid-margin">
+                        <div class="card bg-gradient-primary border-0">
+                            <div class="card-body py-3 px-4 d-flex align-items-center justify-content-between flex-wrap">
+                                <p class="mb-0 text-white font-weight-medium">Get tons of UI components, Plugins, multiple layouts, 20+ sample pages, and more!                  </p>
+                                <div class="d-flex">
+                                    <a href="https://www.bootstrapdash.com/product/majestic-admin-pro?utm_source=organic&amp;utm_medium=banner&amp;utm_campaign=free-preview" target="_blank" class="btn btn-outline-light mr-2 bg-gradient-danger border-0">Check Pro Version</a>
+                                    <button id="bannerClose" class="btn border-0 p-0 ml-auto">
+                                        <i class="mdi mdi-close text-white"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body dashboard-tabs p-0">
+                                <ul class="nav nav-tabs px-4" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="sales-tab" data-toggle="tab" href="#sales" role="tab" aria-controls="sales" aria-selected="false">Sales</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="purchases-tab" data-toggle="tab" href="#purchases" role="tab" aria-controls="purchases" aria-selected="false">Purchases</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content py-0 px-0">
+                                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                                        <div class="d-flex flex-wrap justify-content-xl-between">
+                                            <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Start date</small>
+                                                    <div class="dropdown">
+                                                        <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
+                                                            <a class="dropdown-item" href="#">12 Aug 2018</a>
+                                                            <a class="dropdown-item" href="#">22 Sep 2018</a>
+                                                            <a class="dropdown-item" href="#">21 Oct 2018</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Revenue</small>
+                                                    <h5 class="mr-2 mb-0">$577545</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Total views</small>
+                                                    <h5 class="mr-2 mb-0">9833550</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Downloads</small>
+                                                    <h5 class="mr-2 mb-0">2233783</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Flagged</small>
+                                                    <h5 class="mr-2 mb-0">3497843</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
+                                        <div class="d-flex flex-wrap justify-content-xl-between">
+                                            <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Start date</small>
+                                                    <div class="dropdown">
+                                                        <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
+                                                            <a class="dropdown-item" href="#">12 Aug 2018</a>
+                                                            <a class="dropdown-item" href="#">22 Sep 2018</a>
+                                                            <a class="dropdown-item" href="#">21 Oct 2018</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Downloads</small>
+                                                    <h5 class="mr-2 mb-0">2233783</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Total views</small>
+                                                    <h5 class="mr-2 mb-0">9833550</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Revenue</small>
+                                                    <h5 class="mr-2 mb-0">$577545</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Flagged</small>
+                                                    <h5 class="mr-2 mb-0">3497843</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
+                                        <div class="d-flex flex-wrap justify-content-xl-between">
+                                            <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Start date</small>
+                                                    <div class="dropdown">
+                                                        <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
+                                                            <a class="dropdown-item" href="#">12 Aug 2018</a>
+                                                            <a class="dropdown-item" href="#">22 Sep 2018</a>
+                                                            <a class="dropdown-item" href="#">21 Oct 2018</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Revenue</small>
+                                                    <h5 class="mr-2 mb-0">$577545</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Total views</small>
+                                                    <h5 class="mr-2 mb-0">9833550</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Downloads</small>
+                                                    <h5 class="mr-2 mb-0">2233783</h5>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                                <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
+                                                <div class="d-flex flex-column justify-content-around">
+                                                    <small class="mb-1 text-muted">Flagged</small>
+                                                    <h5 class="mr-2 mb-0">3497843</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                <p class="card-title">Cash deposits</p>
+                                <p class="mb-4">To start a blog, think of a topic about and first brainstorm party is ways to write details</p>
+                                <div id="cash-deposits-chart-legend" class="d-flex justify-content-center pt-3"><ul class="dashboard-chart-legend"><li><span style="background-color: #ff4747 "></span>Returns</li><li><span style="background-color: #4d83ff "></span>Sales</li><li><span style="background-color: #ffc100 "></span>Loss</li></ul></div>
+                                <canvas id="cash-deposits-chart" width="795" height="397" style="display: block; width: 795px; height: 397px;" class="chartjs-render-monitor"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 grid-margin stretch-card">
+                        <div class="card"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                            <div class="card-body">
+                                <p class="card-title">Total sales</p>
+                                <h1>$ 28835</h1>
+                                <h4>Gross sales over the years</h4>
+                                <p class="text-muted">Today, many people rely on computers to do homework, work, and create or store useful information. Therefore, it is important </p>
+                                <div id="total-sales-chart-legend"><ul class="dashboard-chart-legend mb-0 mt-4"><li><span style="background-color: rgba(47,91,191,0.77) "></span>2019</li><li><span style="background-color: rgba(77,131,255,0.77) "></span>2018</li><li><span style="background-color: rgba(77,131,255,0.43) "></span>Past years</li></ul></div>
+                            </div>
+                            <canvas id="total-sales-chart" width="605" height="302" style="display: block; width: 605px; height: 302px;" class="chartjs-render-monitor"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Recent Purchases</p>
+                                <div class="table-responsive">
+                                    <div id="recent-purchases-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12"><table id="recent-purchases-listing" class="table dataTable no-footer" role="grid">
+                                        <thead>
+                                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 213.375px;">Name</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="Status report: activate to sort column ascending" style="width: 272.531px;">Status report</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 196px;">Office</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 101.219px;">Price</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 147.172px;">Date</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="Gross amount: activate to sort column ascending" style="width: 214.453px;">Gross amount</th></tr>
+                                        </thead>
+                                        <tbody>
+
+
+
+
+
+
+
+
+                                        <tr role="row" class="odd">
+                                            <td class="sorting_1">Alvin Fisher</td>
+                                            <td>Ui design completed</td>
+                                            <td>East Mayra</td>
+                                            <td>$23230</td>
+                                            <td>18 Jul 2018</td>
+                                            <td>$83127</td>
+                                        </tr><tr role="row" class="even">
+                                            <td class="sorting_1">Betty Hunt</td>
+                                            <td>Ui design not completed</td>
+                                            <td>Lake Sandrafort</td>
+                                            <td>$571</td>
+                                            <td>25 Jun 2018</td>
+                                            <td>$78952</td>
+                                        </tr><tr role="row" class="odd">
+                                            <td class="sorting_1">Emily Cunningham</td>
+                                            <td>support</td>
+                                            <td>Makennaton</td>
+                                            <td>$939</td>
+                                            <td>16 Jul 2018</td>
+                                            <td>$29177</td>
+                                        </tr><tr role="row" class="even">
+                                            <td class="sorting_1">Ernest Wade</td>
+                                            <td>Levelled up</td>
+                                            <td>West Fidelmouth</td>
+                                            <td>$484</td>
+                                            <td>08 Sep 2018</td>
+                                            <td>$50862</td>
+                                        </tr><tr role="row" class="odd">
+                                            <td class="sorting_1">Jacob Kennedy</td>
+                                            <td>New project</td>
+                                            <td>Cletaborough</td>
+                                            <td>$314</td>
+                                            <td>12 Jul 2018</td>
+                                            <td>$34167</td>
+                                        </tr><tr role="row" class="even">
+                                            <td class="sorting_1">Jeremy Ortega</td>
+                                            <td>Levelled up</td>
+                                            <td>Catalinaborough</td>
+                                            <td>$790</td>
+                                            <td>06 Jan 2018</td>
+                                            <td>$2274253</td>
+                                        </tr><tr role="row" class="odd">
+                                            <td class="sorting_1">Minnie Farmer</td>
+                                            <td>support</td>
+                                            <td>Agustinaborough</td>
+                                            <td>$30</td>
+                                            <td>30 Apr 2018</td>
+                                            <td>$44617</td>
+                                        </tr><tr role="row" class="even">
+                                            <td class="sorting_1">Myrtie Lambert</td>
+                                            <td>Ui design completed</td>
+                                            <td>Cassinbury</td>
+                                            <td>$36</td>
+                                            <td>05 Nov 2018</td>
+                                            <td>$36422</td>
+                                        </tr></tbody>
+                                    </table></div></div><div class="row"><div class="col-sm-12 col-md-5"></div><div class="col-sm-12 col-md-7"></div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard template</a> from Bootstrapdash.com</span>
+                </div>
+            </footer>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+
+<!-- plugins:js -->
+<script src="https://majestic.bootmb.com/vendors/base/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<script src="https://majestic.bootmb.com/vendors/chart.js/Chart.min.js"></script>
+<script src="https://majestic.bootmb.com/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="https://majestic.bootmb.com/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script src="https://majestic.bootmb.com/js/off-canvas.js"></script>
+<script src="https://majestic.bootmb.com/js/hoverable-collapse.js"></script>
+<script src="https://majestic.bootmb.com/js/template.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="https://majestic.bootmb.com/js/dashboard.js"></script>
+<script src="https://majestic.bootmb.com/js/data-table.js"></script>
+<script src="https://majestic.bootmb.com/js/jquery.dataTables.js"></script>
+<script src="https://majestic.bootmb.com/js/dataTables.bootstrap4.js"></script>
+<!-- End custom js for this page-->
+<script src="https://majestic.bootmb.com/js/jquery.cookie.js" type="text/javascript"></script>
+
+
+
+
+</body></html>
+
+
+<!-- JAVASCRIPT -->
+
+<!-- Vendor JS -->
+<script src="https://mb.bootcss.com/assets/js/vendor.bundle.js"></script>
+
+<!-- Theme JS -->
+<script src="https://mb.bootcss.com/assets/js/theme.bundle.js"></script>
+
+
+
+<script src="chrome-extension://nhiheekdcnmfbapkmpbhmplfddenhjic/sm.bundle.js" data-pname="supercopy-v3" data-asset-path="https://spc3.s3.ap-east-1.amazonaws.com"></script></body></html>

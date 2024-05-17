@@ -1,0 +1,35 @@
+server:
+  port:8080
+Spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/smart_persion_sys?useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    prefix=classpath:/templates/
+    encoding=UTF-8
+    cache=false
+    suffix=.html
+    servlet.content-type=text/html
+    #设置重启的目录
+  devtools:
+    restart:
+      additional-paths: src/main/java
+  #  classpath目录下的文件夹内容修改不重启
+      exclude: static/**
+  mvc:
+    static-path-pattern=/static/**:
+
+#  mvc:
+#    static-path-pattern: /static/**
+# 加载mybati的全局配置文件
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.edu.smartpersionsys.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
+
