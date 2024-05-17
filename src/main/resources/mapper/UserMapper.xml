@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.smartpersionsys.mapper.UserMapper">
+
+    <resultMap id="userMap" type="User">
+        <id property="id" column="user_id"/>
+        <result property="name" column="user_name"/>
+        <result property="password" column="user_password"/>
+        <result property="email" column="user_email"/>
+        <result property="role" column="user_role"/>
+        <result property="status" column="user_status"/>
+    </resultMap>
+    <!-- -->
+    <select id="isLoginByUserNameAndPassword" resultType="user">
+        select * from user where user_name=#{userName} and user_password=#{userPassword}
+    </select>
+
+    <select id="allSelect" resultMap="userMap">
+        select * from user
+    </select>
+
+</mapper>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>管理老人</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--    <link rel="stylesheet" href="/bootstrap-5.3.0/css"/>-->
+    <!--    <script src="/bootstrap-5.3.0/js"></script>-->
+    <!--    <link th:href="@{/bootstrap-5.3.0/css/bootstrap.css}" type="text/css" rel="stylesheet"/>-->
+    <!--    <link th:href="@{/bootstrap-table/dist/bootstrap-table.css}" type="text/css" rel="stylesheet"/>-->
+    <!--    <script th:src="@{/bootstrap-5.3.0/js/bootstrap.js}" type="text/javascript" ></script>-->
+    <!--    <script th:src="@{/bootstrap-table/dist/bootstrap-table.js}" type="text/javascript"></script>-->
+    <!--    <script th:src="@{/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js}" type="text/javascript"></script>-->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
+
+
+</head>
+<body>
+<div class="wrapper">
+    <aside th:replace="bootstrap-taber::index_aside" class="navbar navbar-vertical navbar-expand-lg navbar-dark">  <!--白色侧边栏：navbar-transparent-->
+    </aside>
+    <div class="page-wrapper">
+        <div class="container-xl">
+            <!-- Page title -->
+            <div class="page-header d-print-none">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <!-- Page pre-title -->
+                        <div class="page-pretitle">
+                            welcome
+                        </div>
+                        <h2 class="page-title">
+                            we are family!
+                        </h2>
+                    </div>
+                    <!-- Page title actions -->
+                    <div class="col-auto ms-auto d-print-none">
+                        <div class="btn-list">
+                  <span class="d-none d-sm-inline">
+                    <a href="#" class="btn btn-white">
+                      New view
+                    </a>
+                  </span>
+                            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                               data-bs-target="#modal-report">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                                添加活动
+                            </a>
+                            <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                               data-bs-target="#modal-report" aria-label="Create new report">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-body m-5">
+                <ul class="timeline">
+                    <li class="timeline-event">
+                        <div class="timeline-event-icon bg-twitter-lt"><!-- SVG icon from http://tabler-icons.io/i/brand-twitter -->
+                            <svg>...</svg>
+                        </div>
+                        <div class="card timeline-event-card">
+                            <div class="card-body">
+                                <div class="text-secondary float-end">10 hrs ago</div>
+                                <h4>+1150 Followers</h4>
+                                <p class="text-secondary">You’re getting more and more followers, keep it up!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-event">
+                        <div class="timeline-event-icon"><!-- SVG icon from http://tabler-icons.io/i/briefcase -->
+                            <svg>...</svg>
+                        </div>
+                        <div class="card timeline-event-card">
+                            <div class="card-body">
+                                <div class="text-secondary float-end">2 hrs ago</div>
+                                <h4>+3 New Products were added!</h4>
+                                <p class="text-secondary">Congratulations!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-event">
+                        <div class="timeline-event-icon"><!-- SVG icon from http://tabler-icons.io/i/check -->
+                            <svg>...</svg>
+                        </div>
+                        <div class="card timeline-event-card">
+                            <div class="card-body">
+                                <div class="text-secondary float-end">1 day ago</div>
+                                <h4>Database backup completed!</h4>
+                                <p class="text-secondary">Download the <a href="#">latest backup</a>.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-event">
+                        <div class="timeline-event-icon bg-facebook-lt"><!-- SVG icon from http://tabler-icons.io/i/brand-facebook -->
+                            <svg>...</svg>
+                        </div>
+                        <div class="card timeline-event-card">
+                            <div class="card-body">
+                                <div class="text-secondary float-end">1 day ago</div>
+                                <h4>+290 Page Likes</h4>
+                                <p class="text-secondary">This is great, keep it up!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-event">
+                        <div class="timeline-event-icon"><!-- SVG icon from http://tabler-icons.io/i/user-plus -->
+                            <svg>...</svg>
+                        </div>
+                        <div class="card timeline-event-card">
+                            <div class="card-body">
+                                <div class="text-secondary float-end">2 days ago</div>
+                                <h4>+3 Friend Requests</h4>
+                                <div class="avatar-list mt-3">
+          <span class="avatar" style="background-image: url(...)">
+            <span class="badge bg-success"></span></span>
+                                    <span class="avatar">
+            <span class="badge bg-success"></span>JL</span>
+                                    <span class="avatar" style="background-image: url(...)">
+            <span class="badge bg-success"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-event">
+                        <div class="timeline-event-icon"><!-- SVG icon from http://tabler-icons.io/i/photo -->
+                            <svg>...</svg>
+                        </div>
+                        <div class="card timeline-event-card">
+                            <div class="card-body">
+                                <div class="text-secondary float-end">3 days ago</div>
+                                <h4>+2 New photos</h4>
+                                <div class="mt-3">
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <div class="media media-2x1 rounded">
+                                                <a class="media-content" style="background-image: url(...)"></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="media media-2x1 rounded">
+                                                <a class="media-content" style="background-image: url(...)"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-event">
+                        <div class="timeline-event-icon"><!-- SVG icon from http://tabler-icons.io/i/settings -->
+                            <svg>...</svg>
+                        </div>
+                        <div class="card timeline-event-card">
+                            <div class="card-body">
+                                <div class="text-secondary float-end">2 weeks ago</div>
+                                <h4>System updated to v2.02</h4>
+                                <p class="text-secondary">Check the complete changelog at the <a href="#">activity
+                                    page</a>.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+
+            </div>
+        </div>
+
+    </div>
+    <!--welcome top-->
+
+</div>
+<a href="#" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#modal-team">
+    Modal with simple form
+</a>
+<a href="#" class="btn btn-outline-success w-100">
+    Success
+</a>
+<div class="modal modal-blur fade" id="modal-team" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add a new team</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3 align-items-end">
+                    <div class="col-auto">
+                        <a href="#" class="avatar avatar-upload rounded">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            <span class="avatar-upload-text">Add</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Pick your team color</label>
+                    <div class="row g-2">
+                        <div class="col-auto">
+                            <label class="form-colorinput">
+                                <input name="color" type="radio" value="dark" class="form-colorinput-input">
+                                <span class="form-colorinput-color bg-dark"></span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-colorinput form-colorinput-light">
+                                <input name="color" type="radio" value="white" class="form-colorinput-input" checked="">
+                                <span class="form-colorinput-color bg-white"></span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-colorinput">
+                                <input name="color" type="radio" value="blue" class="form-colorinput-input">
+                                <span class="form-colorinput-color bg-blue"></span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-colorinput">
+                                <input name="color" type="radio" value="azure" class="form-colorinput-input">
+                                <span class="form-colorinput-color bg-azure"></span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-colorinput">
+                                <input name="color" type="radio" value="indigo" class="form-colorinput-input">
+                                <span class="form-colorinput-color bg-indigo"></span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-colorinput">
+                                <input name="color" type="radio" value="purple" class="form-colorinput-input">
+                                <span class="form-colorinput-color bg-purple"></span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-colorinput">
+                                <input name="color" type="radio" value="pink" class="form-colorinput-input">
+                                <span class="form-colorinput-color bg-pink"></span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-colorinput">
+                                <input name="color" type="radio" value="red" class="form-colorinput-input">
+                                <span class="form-colorinput-color bg-red"></span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-colorinput">
+                                <input name="color" type="radio" value="orange" class="form-colorinput-input">
+                                <span class="form-colorinput-color bg-orange"></span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-colorinput">
+                                <input name="color" type="radio" value="yellow" class="form-colorinput-input">
+                                <span class="form-colorinput-color bg-yellow"></span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label class="form-colorinput">
+                                <input name="color" type="radio" value="lime" class="form-colorinput-input">
+                                <span class="form-colorinput-color bg-lime"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="form-label">Additional info</label>
+                    <textarea class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Add Team</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
