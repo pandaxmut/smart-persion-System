@@ -20,8 +20,14 @@ public interface UserMapper {
 //            @Result(column = "user_role", property = "role"),
 //            @Result(column = "user_status", property = "status")
 //    })
-    User isLoginByUserNameAndPassword(User user);
+    User getUserByUserNameAndPasswordAndRole(User user);
 
     List<User> allSelect();
+
+    //插入
+    int insert(User user);
+
+    //通过name和 role 查找是否有相同的用户
+    User selectByNameAndRole(User user);
 
 }

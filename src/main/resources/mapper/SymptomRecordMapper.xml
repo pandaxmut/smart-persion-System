@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.smartpersionsys.mapper.SymptomRecordMapper">
+
+    <!--
+    指定日期，统计症状并对症状倒序排序
+    List<Symptoms> getSymptomNameAndCountByDate(Date date);
+    -->
+    <select id="getSymptomNameAndCountByDate" resultType="symptoms">
+        SELECT symptom_name,COUNT(*) AS count
+        FROM symptom_record
+        WHERE DATE(date) = #{date}
+        GROUP BY symptom_name
+        ORDER BY count DESC
+    </select>
+
+</mapper>

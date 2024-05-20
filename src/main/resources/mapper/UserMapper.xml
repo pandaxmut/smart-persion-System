@@ -13,12 +13,19 @@
         <result property="status" column="user_status"/>
     </resultMap>
     <!-- -->
-    <select id="isLoginByUserNameAndPassword" resultType="user">
-        select * from user where user_name=#{userName} and user_password=#{userPassword}
+    <select id="getUserByUserNameAndPasswordAndRole" resultType="user">
+        select * from user where user_name=#{userName} and user_password=#{userPassword} and user_role=#{userRole}
     </select>
 
     <select id="allSelect" resultMap="userMap">
         select * from user
     </select>
 
+    <select id="selectByNameAndRole" resultType="user">
+        select * from user where user_name=#{userName} and user_role=#{userRole}
+    </select>
+
+    <insert id="insert">
+        insert into user(user_name,user_password,user_role,user_email,user_status) values (#{userName},#{userPassword},#{userRole},#{userEmail},0)
+    </insert>
 </mapper>
