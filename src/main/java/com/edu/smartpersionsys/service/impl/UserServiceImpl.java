@@ -13,10 +13,23 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Override
     public boolean login(User user) {
-        User u = userMapper.isLoginByUserNameAndPassword(user);
+        User u = userMapper.getUserByUserNameAndPasswordAndRole(user);
 //        System.out.println(u.getName());
         if (u != null) return true;
         else return false;
+    }
 
+    @Override
+    public boolean register(User user) {
+
+        int flag = userMapper.insert(user);
+        if (flag != 0) return true;
+        else return false;
+    }
+
+    @Override
+    public boolean isSameByNameAndRole(User user) {
+        if (userMapper.selectByNameAndRole(user)!=null) return true;
+        return false;
     }
 }
