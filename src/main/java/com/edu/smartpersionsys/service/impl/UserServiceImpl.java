@@ -12,11 +12,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
     @Override
-    public boolean login(User user) {
+    public User login(User user) {
         User u = userMapper.getUserByUserNameAndPasswordAndRole(user);
 //        System.out.println(u.getName());
-        if (u != null) return true;
-        else return false;
+        return u;
     }
 
     @Override

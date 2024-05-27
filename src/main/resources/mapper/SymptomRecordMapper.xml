@@ -7,11 +7,12 @@
     <!--
     指定日期，统计症状并对症状倒序排序
     List<Symptoms> getSymptomNameAndCountByDate(Date date);
+    #         WHERE DATE(date) = #{date}
     -->
     <select id="getSymptomNameAndCountByDate" resultType="symptoms">
         SELECT symptom_name,COUNT(*) AS count
         FROM symptom_record
-        WHERE DATE(date) = #{date}
+        WHERE date = '2024-05-20'
         GROUP BY symptom_name
         ORDER BY count DESC
     </select>

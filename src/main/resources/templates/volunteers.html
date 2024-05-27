@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf的入门</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--    <link rel="stylesheet" href="/bootstrap-5.3.0/css"/>-->
+    <!--    <script src="/bootstrap-5.3.0/js"></script>-->
+    <!-- CSS files -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+</head>
+<body>
+<div class="page">
+    <header class="navbar navbar-expand-sm navbar-light d-print-none">
+        <div class="container-xl">
+            <!-- 判断是否是管理员登录，如果是的话就显示返回主页的链接 -->
+            <h1 th:if="${session.user.userRole == '管理员'}"
+                class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
+                    <li class="breadcrumb-item"><a th:href="@{/index}">主页</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/index}" href="#">管理</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="">志愿者信息</a></li>
+                </ol>
+            </h1>
+            <!-- 用户的头像 -->
+            <div class="navbar-nav flex-row order-md-last">
+                <div class="nav-item dropdown d-none d-md-flex me-3">
+                    <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1"
+                       aria-label="Show notifications">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
+                            <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
+                        </svg>
+                        <span class="badge bg-red"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-card">
+                        <div class="card">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad amet consectetur
+                                exercitationem fugiat in ipsa ipsum, natus odio quidem quod repudiandae sapiente. Amet
+                                debitis et magni maxime necessitatibus ullam.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                       aria-label="Open user menu" aria-expanded="false">
+                        <span class="avatar avatar-sm">头像</span>
+                        <div class="d-none d-xl-block ps-2">
+                            <div>name</div>
+                            <div class="mt-1 small text-secondary">description</div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <a href="#" class="dropdown-item">Set status</a>
+                        <a href="#" class="dropdown-item">Profile &amp; account</a>
+                        <a href="#" class="dropdown-item">Feedback</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">Settings</a>
+                        <a href="#" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 设置一个模态框 给用户上传意见反馈 -->
+            <!-- Page title -->
+            <div class="page-header d-print-none" th:if="${session.user.userRole == '志愿者'}">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <!-- Page pre-title -->
+                        <div class="page-pretitle">
+                            welcome
+                        </div>
+                        <h2 class="page-title">
+                            we are family!
+                        </h2>
+                    </div>
+                    <!-- Page title actions -->
+                    <div class="col-auto ms-auto d-print-none">
+                        <div class="btn-list">
+                  <span class="d-none d-sm-inline">
+                    <a href="#" class="btn btn-white">
+                      New view
+                    </a>
+                  </span>
+                            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                               data-bs-target="#modal-report">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                                反馈意见
+                            </a>
+                            <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                               data-bs-target="#modal-report" aria-label="Create new report">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="page-wrapper my-3">
+        <div class="page-body">
+            <div class="container-xl">
+                <div class="row row-deck row-cards ">
+                    <div class="col-6">
+                        <div class="card">
+                            <a href="#" class="btn btn-outline-warning w-100 h-100" data-bs-toggle="modal"
+                               data-bs-target="#modal-SymptomRecord"><h1>志愿信息</h1></a>
+                            <div class="modal modal-blur fade" id="modal-SymptomRecord"
+                                 tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">档案信息</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            暂未实现查看档案信息功能...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <a href="#" class="btn btn-outline-warning w-100 h-100" data-bs-toggle="modal"
+                               data-bs-target="#modal-Schedule"><h1>接收任务</h1></a>
+                            <div class="modal modal-blur fade" id="modal-Schedule"
+                                 tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">每日活动</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            暂未实现查看每日活动功能...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-body my-5">
+                        <ul class="timeline">
+                            <li class="timeline-event">
+                                <div class="timeline-event-icon bg-twitter-lt">
+                                    <!-- SVG icon from http://tabler-icons.io/i/brand-twitter -->
+                                    <svg>...</svg>
+                                </div>
+                                <div class="card timeline-event-card">
+                                    <div class="card-body">
+                                        <div class="text-secondary float-end">10 hrs ago</div>
+                                        <h4>+1150 Followers</h4>
+                                        <p class="text-secondary">You’re getting more and more followers, keep it
+                                            up!</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-event">
+                                <div class="timeline-event-icon">
+                                    <!-- SVG icon from http://tabler-icons.io/i/briefcase -->
+                                    <svg>...</svg>
+                                </div>
+                                <div class="card timeline-event-card">
+                                    <div class="card-body">
+                                        <div class="text-secondary float-end">2 hrs ago</div>
+                                        <h4>+3 New Products were added!</h4>
+                                        <p class="text-secondary">Congratulations!</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-event">
+                                <div class="timeline-event-icon"><!-- SVG icon from http://tabler-icons.io/i/check -->
+                                    <svg>...</svg>
+                                </div>
+                                <div class="card timeline-event-card">
+                                    <div class="card-body">
+                                        <div class="text-secondary float-end">1 day ago</div>
+                                        <h4>Database backup completed!</h4>
+                                        <p class="text-secondary">Download the <a href="#">latest backup</a>.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-event">
+                                <div class="timeline-event-icon bg-facebook-lt">
+                                    <!-- SVG icon from http://tabler-icons.io/i/brand-facebook -->
+                                    <svg>...</svg>
+                                </div>
+                                <div class="card timeline-event-card">
+                                    <div class="card-body">
+                                        <div class="text-secondary float-end">1 day ago</div>
+                                        <h4>+290 Page Likes</h4>
+                                        <p class="text-secondary">This is great, keep it up!</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-event">
+                                <div class="timeline-event-icon">
+                                    <!-- SVG icon from http://tabler-icons.io/i/user-plus -->
+                                    <svg>...</svg>
+                                </div>
+                                <div class="card timeline-event-card">
+                                    <div class="card-body">
+                                        <div class="text-secondary float-end">2 days ago</div>
+                                        <h4>+3 Friend Requests</h4>
+                                        <div class="avatar-list mt-3">
+          <span class="avatar" style="background-image: url(...)">
+            <span class="badge bg-success"></span></span>
+                                            <span class="avatar">
+            <span class="badge bg-success"></span>JL</span>
+                                            <span class="avatar" style="background-image: url(...)">
+            <span class="badge bg-success"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-event">
+                                <div class="timeline-event-icon"><!-- SVG icon from http://tabler-icons.io/i/photo -->
+                                    <svg>...</svg>
+                                </div>
+                                <div class="card timeline-event-card">
+                                    <div class="card-body">
+                                        <div class="text-secondary float-end">3 days ago</div>
+                                        <h4>+2 New photos</h4>
+                                        <div class="mt-3">
+                                            <div class="row g-2">
+                                                <div class="col-6">
+                                                    <div class="media media-2x1 rounded">
+                                                        <a class="media-content" style="background-image: url(...)"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="media media-2x1 rounded">
+                                                        <a class="media-content" style="background-image: url(...)"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-event">
+                                <div class="timeline-event-icon">
+                                    <!-- SVG icon from http://tabler-icons.io/i/settings -->
+                                    <svg>...</svg>
+                                </div>
+                                <div class="card timeline-event-card">
+                                    <div class="card-body">
+                                        <div class="text-secondary float-end">2 weeks ago</div>
+                                        <h4>System updated to v2.02</h4>
+                                        <p class="text-secondary">Check the complete changelog at the <a href="#">activity
+                                            page</a>.</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框组件 new view， create new report-->
+    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <form action="/submitSuggestion" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New Suggestions</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" th:value="${session.older.olderName}" disabled="disabled"
+                                   class="form-control" name="example-text-input" placeholder="输入你的姓名">
+                        </div>
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">title</label>
+                                    <input type="text" name="title" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div>
+                                    <label class="form-label">描述</label>
+                                    <textarea name="description" class="form-control" rows="3"
+                                              placeholder="请您更具体的描述您的问题..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                            取消
+                        </a>
+                        <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--<script th:if="${insertMsg} == '反馈成功!'" type="text/javascript">-->
+    <!--    alert("反馈成功!");-->
+    <!--</script>-->
+    <!--<script th:if="${insertMsg} == '反馈失败!'" type="text/javascript">-->
+    <!--    alert("反馈失败!");-->
+    <!--</script>-->
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/libs/apexcharts/dist/apexcharts.min.js"
+            defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+</body>
+</html>

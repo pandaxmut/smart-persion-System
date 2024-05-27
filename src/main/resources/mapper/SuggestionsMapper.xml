@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.smartpersionsys.mapper.SuggestionsMapper">
+
+
+    <!-- -->
+
+<!--    //查看所有建议-->
+<!--    int selectUserAndSuggestion();-->
+
+    <select id="selectOlderAndSuggestion" resultType="suggestions">
+        Select s.id,s.older_id,o.older_name,s.title,s.description,s.date,o.older_photo
+        from older as o  join t_suggestions as s on o.older_id = s.older_id
+        ORDER BY date DESC;
+    </select>
+
+
+    <!--    //插入建议-->
+    <!--    int insertSuggestion(Suggestions suggestion);-->
+    <insert id="insertSuggestion">
+        insert into t_suggestions(older_id, title, description, date)
+            value (#{olderId},#{title},#{description},#{date})
+    </insert>
+
+
+
+
+</mapper>
