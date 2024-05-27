@@ -10,37 +10,99 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
-
-
 </head>
 <body>
-<!--<div class="" style="font-size: 18px;padding: 10px">-->
-<!--    <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">-->
-<!--        <li class="breadcrumb-item"><a th:href="@{/index}">主页</a></li>-->
-<!--        <li class="breadcrumb-item"><a th:href="@{/old}" href="#">管理</a></li>-->
-<!--        <li class="breadcrumb-item active" aria-current="page"><a href="">老人信息</a></li>-->
-<!--    </ol>-->
-<!--</div>-->
 <div class="page">
     <header class="navbar navbar-expand-sm navbar-light d-print-none">
         <div class="container-xl">
-            <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <!-- 判断是否是管理员登录，如果是的话就显示返回主页的链接 -->
+            <h1 th:if="${session.user.userRole == '管理员'}" class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                 <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
                     <li class="breadcrumb-item"><a th:href="@{/index}">主页</a></li>
                     <li class="breadcrumb-item"><a th:href="@{/old}" href="#">管理</a></li>
                     <li class="breadcrumb-item active" aria-current="page"><a href="">老人信息</a></li>
                 </ol>
             </h1>
-
+            <!-- 用户的头像 -->
             <div class="navbar-nav flex-row order-md-last">
-                <div class="nav-item">
-                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0">
-                        <span class="avatar avatar-sm" style="background-image: url(/media/photo/icon.jpg)"></span>
+                <div class="nav-item dropdown d-none d-md-flex me-3">
+                    <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path><path d="M9 17v1a3 3 0 0 0 6 0v-1"></path></svg>
+                        <span class="badge bg-red"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-card">
+                        <div class="card">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad amet consectetur exercitationem fugiat in ipsa ipsum, natus odio quidem quod repudiandae sapiente. Amet debitis et magni maxime necessitatibus ullam.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu" aria-expanded="false">
+                        <span class="avatar avatar-sm" th:style="'background-image: url('+${older.olderPhoto}+')'"></span>
                         <div class="d-none d-xl-block ps-2">
-                            <div><p th:text="${userName}">lin</p></div>
-                            <div class="mt-1 small text-secondary">快乐的老头儿</div>
+                            <div th:text="${older.olderName}">lin</div>
+                            <div class="mt-1 small text-secondary" th:text="${older.olderId}"></div>
                         </div>
                     </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <a href="#" class="dropdown-item">Set status</a>
+                        <a href="#" class="dropdown-item">Profile &amp; account</a>
+                        <a href="#" class="dropdown-item">Feedback</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">Settings</a>
+                        <a href="#" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 设置一个模态框 给用户上传意见反馈 -->
+            <!-- Page title -->
+            <div class="page-header d-print-none">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <!-- Page pre-title -->
+                        <div class="page-pretitle">
+                            welcome
+                        </div>
+                        <h2 class="page-title">
+                            we are family!
+                        </h2>
+                    </div>
+                    <!-- Page title actions -->
+                    <div class="col-auto ms-auto d-print-none">
+                        <div class="btn-list">
+                  <span class="d-none d-sm-inline">
+                    <a href="#" class="btn btn-white">
+                      New view
+                    </a>
+                  </span>
+                            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                               data-bs-target="#modal-report">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                                反馈意见
+                            </a>
+                            <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                               data-bs-target="#modal-report" aria-label="Create new report">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,117 +113,113 @@
                 <div class="row row-deck row-cards">
                     <div class="col-4">
                         <div class="card">
-                            <div class="card-header">基本信息</div>
-                            <div class="card-body" style="height: 10rem"></div>
+                            <a href="#" class="btn btn-outline-warning w-100 h-100" data-bs-toggle="modal"  data-bs-target="#modal-baseInfo"><h1>基本信息</h1></a>
+                            <div  class="modal modal-blur fade"  id="modal-baseInfo"
+                                      tabindex="-1" style="display: none;" aria-hidden="true">
+                                        <div  class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">基本信息</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="col-auto">
+                                                        <label class="form-label" hidden="hidden">olderId</label>
+                                                        <input type="hidden" name="olderId"  th:value="${older.olderId}"  class="form-control">
+                                                    </div>
+                                                    <div class="row mb-3 align-items-end">
+                                                        <div class="col-auto">
+                                                            <label class="form-label">name</label>
+                                                            <input type="hidden" name="olderName" th:value="${older.olderName}">
+                                                            <input type="text" name="olderName"  th:value="${older.olderName}" value="熊熊熊熊熊熊"  disabled="disabled"  class="form-control">
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label">联系电话</label>
+                                                            <input type="text"  name="olderPhone" th:value="${older.olderPhone}" th:placeholder="${older.olderPhone}" placeholder="18292928978"  class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3 align-items-end">
+
+                                                        <div class="col-4" th:switch="${older.olderGender}">
+                                                            <label class="form-label">性别</label>
+                                                            <input type="text" th:case="1"  name="olderGender"  th:value="${older.olderGender}" placeholder="男"  class="form-control">
+                                                            <input type="text" th:case="2"  name="olderGender"  th:value="${older.olderGender}" placeholder="女"  class="form-control">
+
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label class="form-label">房间号</label>
+                                                            <input type="text"  name="olderRoomNum" th:value="${older.olderRoomNum}" th:placeholder="${older.olderRoomNum}" placeholder="101"  class="form-control">
+                                                        </div>
+                                                        <div class="col-4" th:switch="${older.olderStatus}">
+                                                            <label class="form-label">健康状态</label>
+                                                            <input type="text"  name="olderStatus"  th:case="1"  th:value="健康" placeholder="健康"  class="form-control">
+                                                            <input type="text"  name="olderStatus"  th:case="2"  th:value="不健康" placeholder="不健康"  class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label class="form-label">描述信息</label>
+                                                        <textarea class="form-control" name="olderDescription" th:text="${older.olderDescription}"  placeholder="请输入描述信息"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="card">
-                            <div class="card-header">健康状况</div>
-                            <div class="card-body" style="height: 10rem"></div>
+                            <a href="#" class="btn btn-outline-warning w-100 h-100" data-bs-toggle="modal"  data-bs-target="#modal-SymptomRecord"><h1>档案信息</h1></a>
+                            <div  class="modal modal-blur fade"  id="modal-SymptomRecord"
+                                  tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div  class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">档案信息</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            暂未实现查看档案信息功能...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="card">
-                            <div class="card-header">每日活动</div>
-                            <div class="card-body" style="height: 10rem"></div>
+                            <a href="#" class="btn btn-outline-warning w-100 h-100" data-bs-toggle="modal"  data-bs-target="#modal-Schedule"><h1>每日活动</h1></a>
+                            <div  class="modal modal-blur fade"  id="modal-Schedule"
+                                  tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div  class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">每日活动</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            暂未实现查看每日活动功能...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-12">
                         <div class="card">
+                            <div class="card-header">
+                                <h3>生命体征检测</h3>
+                            </div>
                             <div class="card-body">
                                 <div id="chart-social-referrals" class="chart-lg"></div>
                             </div>
                         </div>
 
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function() {
-                                window.ApexCharts && (new ApexCharts(document.getElementById('chart-social-referrals'), {
-                                    chart: {
-                                        type: "line",
-                                        fontFamily: 'inherit',
-                                        height: 240,
-                                        parentHeightOffset: 0,
-                                        toolbar: {
-                                            show: false,
-                                        },
-                                        animations: {
-                                            enabled: false
-                                        },
-                                    },
-                                    fill: {
-                                        opacity: 1,
-                                    },
-                                    stroke: {
-                                        width: 2,
-                                        lineCap: "round",
-                                        curve: "smooth",
-                                    },
-                                    series: [{
-                                        name: "Facebook",
-                                        data: [13281, 8521, 15038, 9983, 15417, 8888, 7052, 14270, 5214, 9587, 5950, 16852, 17836, 12217, 17406, 12262, 9147, 14961, 18292, 15230, 13435, 10649, 5140, 13680, 4508, 13271, 13413, 5543, 18727, 18238, 18175, 6246, 5864, 17847, 9170, 6445, 12945, 8142, 8980, 10422, 15535, 11569, 10114, 17621, 16138, 13046, 6652, 9906, 14100, 16495, 6749]
-                                    }, {
-                                        name: "Twitter",
-                                        data: [3680, 1862, 3070, 2252, 5348, 3091, 3000, 3984, 5176, 5325, 2420, 5474, 3098, 1893, 3748, 2879, 4197, 5186, 4213, 4334, 2807, 1594, 4863, 2030, 3752, 4856, 5341, 3954, 3461, 3097, 3404, 4949, 2283, 3227, 3630, 2360, 3477, 4675, 1901, 2252, 3347, 2954, 5029, 2079, 2830, 3292, 4578, 3401, 4104, 3749, 4457, 3734]
-                                    }, {
-                                        name: "Dribbble",
-                                        data: [722, 1866, 961, 1108, 1110, 561, 1753, 1815, 1985, 776, 859, 547, 1488, 766, 702, 621, 1599, 1372, 1620, 963, 759, 764, 739, 789, 1696, 1454, 1842, 734, 551, 1689, 1924, 1875, 908, 1675, 1541, 1953, 534, 502, 1524, 1867, 719, 1472, 1608, 1025, 889, 1150, 654, 1695, 1662, 1285, 1787]
-                                    }],
-                                    tooltip: {
-                                        theme: 'dark'
-                                    },
-                                    grid: {
-                                        padding: {
-                                            top: -20,
-                                            right: 0,
-                                            left: -4,
-                                            bottom: -4
-                                        },
-                                        strokeDashArray: 4,
-                                        xaxis: {
-                                            lines: {
-                                                show: true
-                                            }
-                                        },
-                                    },
-                                    xaxis: {
-                                        labels: {
-                                            padding: 0,
-                                        },
-                                        tooltip: {
-                                            enabled: false
-                                        },
-                                        type: 'datetime',
-                                    },
-                                    yaxis: {
-                                        labels: {
-                                            padding: 4
-                                        },
-                                    },
-                                    labels: [
-                                        '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19', '2020-07-20', '2020-07-21', '2020-07-22', '2020-07-23', '2020-07-24', '2020-07-25', '2020-07-26', '2020-07-27', '2020-07-28', '2020-07-29', '2020-07-30', '2020-07-31', '2020-08-01', '2020-08-02', '2020-08-03', '2020-08-04', '2020-08-05', '2020-08-06', '2020-08-07', '2020-08-08', '2020-08-09', '2020-08-10'
-                                    ],
-                                    colors: [tabler.getColor("facebook"), tabler.getColor("twitter"), tabler.getColor("dribbble")],
-                                    legend: {
-                                        show: true,
-                                        position: 'bottom',
-                                        offsetY: 12,
-                                        markers: {
-                                            width: 10,
-                                            height: 10,
-                                            radius: 100,
-                                        },
-                                        itemMargin: {
-                                            horizontal: 8,
-                                            vertical: 8
-                                        },
-                                    },
-                                })).render();
-                            });
-                        </script>
 
                     </div>
+
+
+
                     <!--第三行 帖子+购物块-->
                     <div class="col-md-8">
                         <div class="card" style="height: calc(24rem + 10px)">
@@ -581,6 +639,166 @@
         </div>
     </div>
 </div>
+
+<!--模态框组件 new view， create new report-->
+<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <form action="/submitSuggestion" method="post">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Suggestions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" th:value="${session.older.olderName}" disabled="disabled" class="form-control" name="example-text-input" placeholder="输入你的姓名">
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label class="form-label">title</label>
+                                <input type="text" name="title" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div>
+                                <label class="form-label">描述</label>
+                                <textarea name="description" class="form-control" rows="3" placeholder="请您更具体的描述您的问题..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                        取消
+                    </a>
+                    <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        提交
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<!--生命体征数据显示-->
+<script>
+    document.addEventListener("DOMContentLoaded", function (l) {
+        if (window.ApexCharts) {
+            // 使用 Ajax 获取数据
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/getVitalSigns", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var jsonData = JSON.parse(xhr.responseText);
+
+                    // 通过配置选项直接渲染图表
+                    new ApexCharts(document.getElementById('chart-social-referrals'), {
+                        chart: {
+                            type: "line",
+                            fontFamily: 'inherit',
+                            height: 240,
+                            parentHeightOffset: 0,
+                            toolbar: {
+                                show: false,
+                            },
+                            animations: {
+                                enabled: false
+                            },
+                        },
+                        fill: {
+                            opacity: 1,
+                        },
+                        stroke: {
+                            width: 2,
+                            lineCap: "round",
+                            curve: "smooth",
+                        },
+                        series: [{
+                            name: "最低血压",
+                            data: jsonData.maxBP,
+                        }, {
+                            name: "最高血压",
+                            data: jsonData.lowBP,
+                        }, {
+                            name: "体温",
+                            data: jsonData.temperature,
+                        }],
+                        tooltip: {
+                            theme: 'Light'
+                        },
+                        grid: {
+                            padding: {
+                                top: -20,
+                                right: 0,
+                                left: -4,
+                                bottom: -4
+                            },
+                            strokeDashArray: 4,
+                            xaxis: {
+                                lines: {
+                                    show: true
+                                }
+                            },
+                        },
+                        xaxis: {
+                            labels: {
+                                padding: 0,
+                            },
+                            tooltip: {
+                                enabled: false
+                            },
+                            type: 'datetime',
+                        },
+                        yaxis: {
+                            labels: {
+                                padding: 4
+                            },
+                        },
+                        labels: jsonData.days,
+                        colors: [tabler.getColor("twitter"), tabler.getColor("dribbble"), tabler.getColor("purple")],
+                        legend: {
+                            show: true,
+                            position: 'bottom',
+                            offsetY: 12,
+                            markers: {
+                                width: 10,
+                                height: 10,
+                                radius: 100,
+                            },
+                            itemMargin: {
+                                horizontal: 8,
+                                vertical: 8
+                            },
+                        },
+                    }).render();
+                }
+            };
+            xhr.send();
+        }
+    });
+
+</script>
+<script th:if="${insertMsg} == '反馈成功!'" type="text/javascript">
+    alert("反馈成功!");
+</script>
+<script th:if="${insertMsg} == '反馈失败!'" type="text/javascript">
+    alert("反馈失败!");
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/libs/apexcharts/dist/apexcharts.min.js" defer></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>

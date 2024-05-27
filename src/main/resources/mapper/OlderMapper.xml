@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.smartpersionsys.mapper.OlderMapper">
+
+
+    <!-- List<Older> findAll(); -->
+    <select id="findAll" resultType="older">
+        select * from older
+    </select>
+
+    <!-- Older getOlderByOlderName(String olderName); -->
+    <select id="getOlderByOlderName" resultType="older">
+        select * from older where older_name=#{olderName}
+    </select>
+
+    <!--    int updateOlderinfo(Older older);-->
+    <update id="updateOlderinfo" parameterType="older">
+        update older
+        set older_phone=#{olderPhone},older_gender=#{olderGender},
+            older_status=#{olderStatus},older_room_num=#{olderRoomNum},
+            older_description=#{olderDescription},older_photo=#{olderPhoto}
+        where older_id=#{olderId}
+    </update>
+
+    <!--int updateOlderInfoExcludeOlderPhoto(Older older);-->
+    <update id="updateOlderInfoExcludeOlderPhoto" parameterType="older">
+        update older
+        set older_phone=#{olderPhone},older_gender=#{olderGender},
+            older_status=#{olderStatus},older_room_num=#{olderRoomNum},
+            older_description=#{olderDescription}
+        where older_id=#{olderId}
+    </update>
+
+<!--    int getOlderCountByTimes(@Param("pre") String pre, @Param("today") String today);-->
+    <select id="getOlderCountByTimes" resultType="Integer">
+        select count(*) from older
+        where date BETWEEN #{pre} AND #{today}
+    </select>
+
+<!--    Older selectByUserId(@Param("userId")  int userId);-->
+    <select id="selectByUserId" resultType="older">
+        select * from older where user_id=#{userId}
+    </select>
+
+    <!--    Older selectByOlderId(@Param("olderId")  int olderId);-->
+    <select id="selectByOlderId" resultType="older">
+        select * from older where older_id=#{olderId}
+    </select>
+
+
+    <!--    int insert(int userId,String name);-->
+    <insert id="insert">
+        insert into older(user_id,older_name) value (#{userId},#{olderName})
+    </insert>
+
+
+
+</mapper>

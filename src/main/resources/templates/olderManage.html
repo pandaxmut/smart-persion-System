@@ -5,23 +5,53 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!--    <link rel="stylesheet" href="/bootstrap-5.3.0/css"/>-->
     <!--    <script src="/bootstrap-5.3.0/js"></script>-->
-<!--    <link th:href="@{/bootstrap-5.3.0/css/bootstrap.css}" type="text/css" rel="stylesheet"/>-->
-<!--    <link th:href="@{/bootstrap-table/dist/bootstrap-table.css}" type="text/css" rel="stylesheet"/>-->
-<!--    <script th:src="@{/bootstrap-5.3.0/js/bootstrap.js}" type="text/javascript" ></script>-->
-<!--    <script th:src="@{/bootstrap-table/dist/bootstrap-table.js}" type="text/javascript"></script>-->
-<!--    <script th:src="@{/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js}" type="text/javascript"></script>-->
+    <!--    <link th:href="@{/bootstrap-5.3.0/css/bootstrap.css}" type="text/css" rel="stylesheet"/>-->
+    <!--    <link th:href="@{/bootstrap-table/dist/bootstrap-table.css}" type="text/css" rel="stylesheet"/>-->
+    <!--    <script th:src="@{/bootstrap-5.3.0/js/bootstrap.js}" type="text/javascript" ></script>-->
+    <!--    <script th:src="@{/bootstrap-table/dist/bootstrap-table.js}" type="text/javascript"></script>-->
+    <!--    <script th:src="@{/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js}" type="text/javascript"></script>-->
 
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
 
 
 </head>
 <body>
+
+<script th:if="${msg} == '更新成功'" type="text/javascript">
+    alert("更新成功");
+</script>
+<!--<div th:if="${msg} == '更新成功'" class="model">-->
+<!--    <div class="d-flex">-->
+<!--        <div class="modal-body text-center py-4">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-green icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">-->
+<!--                <path stroke="none" d="M0 0h24v24H0z" fill="none" />-->
+<!--                <circle cx="12" cy="12" r="9" />-->
+<!--                <path d="M9 12l2 2l4 -4" />-->
+<!--            </svg>-->
+<!--            <h2 class="alert-title">更新成功!</h2>-->
+<!--            <div class="text-secondary">去查看一下更新的信息吧~</div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>-->
+<!--</div>-->
+<script th:if="${msg} == '更新失败'" type="text/javascript">
+    alert("更新失败");
+</script>
+<script th:if="${msg} == '查无此人'" type="text/javascript">
+    alert("查无此人");
+</script>
+
 <div class="wrapper">
-    <aside th:replace="index::index_aside" class="navbar navbar-vertical navbar-expand-lg navbar-dark">  <!--白色侧边栏：navbar-transparent-->
+    <aside th:replace="index::index_aside" class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+        <!--白色侧边栏：navbar-transparent-->
     </aside>
     <div class="page-wrapper">
         <div class="container-xl">
@@ -74,15 +104,15 @@
             </div>
         </div>
         <div class="page-body">
-            <form th:action="@{/tologin}" method="post">
-                <div class="container"  >
+                <div class="container">
+                <form th:action="@{/old}" method="post">
                     <div class="row col-6">
                         <div class="input-group my-2 ">
-                            <input type="text" class="form-control" placeholder="Search for…" >
-                            <button class="btn" type="button">Go!</button>
+                            <input type="text" name="findOlderName" class="form-control" placeholder="Search for…">
+                            <button type="submit" class="btn">Go!</button>
                         </div>
                     </div>
-
+                </form>
                     <div class="col-12">
                         <div class="card">
 
@@ -97,257 +127,244 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                    <tr th:each="older: ${page.list}">
                                         <td>
-                                            <a th:href="@{/olderPage}">
+                                            <a th:href="@{/{olderId}/olderPage(olderId=${older.olderId})}">
                                                 <div class="d-flex py-1 align-items-center">
-                                                    <span class="avatar me-2" style="background-image: url(/media/photo/icon.jpg)"></span>
+                                                    <span class="avatar me-2"
+                                                          th:style="'background-image: url('+${older.olderPhoto} +')'"></span>
                                                     <div class="flex-fill">
-                                                        <div class="font-weight-medium">Lorry Mion</div>
-                                                        <div class="text-muted"><p class="text-reset">lmiona@livejournal.com</p></div>
+                                                        <div th:text="${older.olderName}" class="font-weight-medium">
+                                                            Lorry Mion
+                                                        </div>
+                                                        <div class="text-muted"><p th:text="${older.olderPhone}"
+                                                                                   class="text-reset">
+                                                            lmiona@livejournal.com</p></div>
                                                     </div>
                                                 </div>
                                             </a>
                                         </td>
                                         <td>
-                                            <div>Automation Specialist IV</div>
+                                            <div th:text="${older.olderDescription}">Automation Specialist IV</div>
                                             <div class="text-muted">Accounting</div>
                                         </td>
-                                        <td class="text-muted">
-                                            User
+                                        <td th:switch="${older.olderStatus}" name="olderStatus" class="text-muted">
+                                            <p th:case="1" th:value="健康">健康</p>
+                                            <p th:case="2" th:value="不健康">不健康</p>
                                         </td>
+                                        <td>
+                                            <a href="#" class="btn btn-outline-warning w-100" data-bs-toggle="modal"  th:data-bs-target="'#modal-edit-'+ ${older.olderId}" data-bs-target="#model-edit">编辑</a>
+                                            <!--编辑-->
+                                        </td>
+                                        <div  class="modal modal-blur fade"  th:id="'modal-edit-'+ ${older.olderId}" id="model-edit"
+                                              tabindex="-1" style="display: none;" aria-hidden="true">
+                                            <form action="/editOlderInfo" method="post" enctype="multipart/form-data">
+                                                <div  class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">修改信息</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="col-auto">
+                                                                <label class="form-label" hidden="hidden">olderId</label>
+                                                                <input type="hidden" name="olderId"  th:value="${older.olderId}"  class="form-control">
+                                                            </div>
+                                                            <div class="row mb-3 align-items-end">
+                                                                <div class="col-auto">
+                                                                    <label class="form-label">name</label>
+                                                                    <input type="hidden" name="olderName" th:value="${older.olderName}">
+                                                                    <input type="text" name="olderName"  th:value="${older.olderName}" value="熊熊熊熊熊熊"  disabled="disabled"  class="form-control">
+                                                                </div>
+                                                                <div class="col">
+                                                                    <label class="form-label">联系电话</label>
+                                                                    <input type="text"  name="olderPhone" th:value="${older.olderPhone}" th:placeholder="${older.olderPhone}" placeholder="18292928978"  class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3 align-items-end">
 
-                                        <td>
-                                            <a href="#" class="btn btn-outline-warning w-100">编辑</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex py-1 align-items-center">
-                                                <span class="avatar me-2" style="background-image: url(/media/photo/icon.jpg)"></span>
-                                                <div class="flex-fill">
-                                                    <div class="font-weight-medium">Leesa Beaty</div>
-                                                    <div class="text-muted"><a href="#" class="text-reset">lbeatyb@alibaba.com</a></div>
+                                                                <div class="col-4" th:switch="${older.olderGender}">
+                                                                    <label class="form-label">性别</label>
+                                                                    <input type="text" th:case="1"  name="olderGender"  th:value="${older.olderGender}" placeholder="男"  class="form-control">
+                                                                    <input type="text" th:case="2"  name="olderGender"  th:value="${older.olderGender}" placeholder="女"  class="form-control">
+
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <label class="form-label">房间号</label>
+                                                                    <input type="text"  name="olderRoomNum" th:value="${older.olderRoomNum}" th:placeholder="${older.olderRoomNum}" placeholder="101"  class="form-control">
+                                                                </div>
+                                                                <div class="col-4" th:switch="${older.olderStatus}">
+                                                                    <label class="form-label">健康状态</label>
+                                                                    <input type="text"  name="olderStatus"  th:case="1"  th:value="健康" placeholder="健康"  class="form-control">
+                                                                    <input type="text"  name="olderStatus"  th:case="2"  th:value="不健康" placeholder="不健康"  class="form-control">
+
+                                                                </div>
+
+                                                            </div>
+                                                            <div>
+                                                                <label class="form-label">描述信息</label>
+                                                                <textarea class="form-control" name="olderDescription" th:text="${older.olderDescription}"  placeholder="请输入描述信息"></textarea>
+                                                            </div>
+                                                            <div>
+                                                                <label class="form-label">上传头像</label>
+                                                                <input type="file" class="form-control" name="photoFile" placeholder="请上传头像"></input>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn me-auto" data-bs-dismiss="modal">关闭</button>
+                                                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">提交</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>Editor</div>
-                                            <div class="text-muted">Services</div>
-                                        </td>
-                                        <td class="text-muted">
-                                            Admin
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-outline-warning w-100">编辑</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex py-1 align-items-center">
-                                                <span class="avatar me-2" style="background-image: url(/media/photo/icon.jpg)"></span>
-                                                <div class="flex-fill">
-                                                    <div class="font-weight-medium">Perren Keemar</div>
-                                                    <div class="text-muted"><a href="#" class="text-reset">pkeemarc@yahoo.com</a></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>Analog Circuit Design manager</div>
-                                            <div class="text-muted">Services</div>
-                                        </td>
-                                        <td class="text-muted">
-                                            User
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-outline-warning w-100">编辑</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex py-1 align-items-center">
-                                                <span class="avatar me-2">lin</span>
-                                                <div class="flex-fill">
-                                                    <div class="font-weight-medium">Sunny Airey</div>
-                                                    <div class="text-muted"><a href="#" class="text-reset">saireyd@prlog.org</a></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>Nuclear Power Engineer</div>
-                                            <div class="text-muted">Engineering</div>
-                                        </td>
-                                        <td class="text-muted">
-                                            Owner
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-outline-warning w-100">编辑</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex py-1 align-items-center">
-                                                <span class="avatar me-2" style="background-image: url(/media/photo/icon.jpg)"></span>
-                                                <div class="flex-fill">
-                                                    <div class="font-weight-medium">Geoffry Flaunders</div>
-                                                    <div class="text-muted"><a href="#" class="text-reset">gflaunderse@loc.gov</a></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>Software Test Engineer II</div>
-                                            <div class="text-muted">Accounting</div>
-                                        </td>
-                                        <td class="text-muted">
-                                            Admin
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-outline-warning w-100">编辑</a>
-                                        </td>
+                                            </form>
+                                        </div>
+
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="my-4 mx-3">
-                                <ul class="pagination ">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                                            <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="15 6 9 12 15 18"></polyline></svg>
+                                <!--分页-->
+                                <ul class="pagination">
+                                    <li class="page-item ">
+                                        <a th:if="${page.pageNum > 1}" th:href="@{${path}+${page.pageNum - 1}}" class="btn w-75 btn-outline-secondary" href="#"  tabindex="-1" aria-disabled="true">
+                                            prev
+                                        </a>
+                                        <a th:if="${page.pageNum == 1}" th:href="@{${path}+${page.pageNum}}" class="btn w-75 btn-outline-secondary" href="#"  tabindex="-1" aria-disabled="true">
                                             prev
                                         </a>
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                    <li class="page-item "  th:each="i:${#numbers.sequence(1,page.pages)}">
+                                        <a mx-1 class="btn w-25 btn-outline-secondary" th:href="@{${path}+${i}}" th:text="${i}" href="#" >1</a></li>
+
                                     <li class="page-item">
-                                        <a class="page-link" href="#">
+                                        <a  class="btn w-75 btn-outline-secondary" href="#" th:if="${page.pageNum < page.pages}" th:href="@{${path}+${page.pageNum + 1}}">
                                             next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="9 6 15 12 9 18"></polyline></svg>
+                                        </a>
+                                        <a  class="btn w-75 btn-outline-secondary" href="#" th:if="${page.pageNum == page.pages}" th:href="@{${path}+${page.pageNum}}">
+                                            next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
                                         </a>
                                     </li>
                                 </ul>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-            </form>
-
         </div>
     </div>
     <!--welcome top-->
 
 </div>
-<a href="#" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#modal-team">
-    Modal with simple form
-</a>
-<a href="#" class="btn btn-outline-success w-100">
-    Success
-</a>
-<div class="modal modal-blur fade" id="modal-team" tabindex="-1" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+
+<div>
+</div>
+
+
+<!--模态框组件 new view， create new report-->
+<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add a new team</h5>
+                <h5 class="modal-title">New report</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="row mb-3 align-items-end">
-                    <div class="col-auto">
-                        <a href="#" class="avatar avatar-upload rounded">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                            <span class="avatar-upload-text">Add</span>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
                 <div class="mb-3">
-                    <label class="form-label">Pick your team color</label>
-                    <div class="row g-2">
-                        <div class="col-auto">
-                            <label class="form-colorinput">
-                                <input name="color" type="radio" value="dark" class="form-colorinput-input">
-                                <span class="form-colorinput-color bg-dark"></span>
-                            </label>
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" name="example-text-input" placeholder="Your report name">
+                </div>
+                <label class="form-label">Report type</label>
+                <div class="form-selectgroup-boxes row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-selectgroup-item">
+                            <input type="radio" name="report-type" value="1" class="form-selectgroup-input" checked="">
+                            <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Simple</span>
+                      <span class="d-block text-muted">Provide only basic data needed for the report</span>
+                    </span>
+                  </span>
+                        </label>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-selectgroup-item">
+                            <input type="radio" name="report-type" value="1" class="form-selectgroup-input">
+                            <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Advanced</span>
+                      <span class="d-block text-muted">Insert charts and additional advanced analyses to be inserted in the report</span>
+                    </span>
+                  </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="mb-3">
+                            <label class="form-label">Report url</label>
+                            <div class="input-group input-group-flat">
+                    <span class="input-group-text">
+                      https://tabler.io/reports/
+                    </span>
+                                <input type="text" class="form-control ps-0" value="report-01" autocomplete="off">
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <label class="form-colorinput form-colorinput-light">
-                                <input name="color" type="radio" value="white" class="form-colorinput-input" checked="">
-                                <span class="form-colorinput-color bg-white"></span>
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <label class="form-colorinput">
-                                <input name="color" type="radio" value="blue" class="form-colorinput-input">
-                                <span class="form-colorinput-color bg-blue"></span>
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <label class="form-colorinput">
-                                <input name="color" type="radio" value="azure" class="form-colorinput-input">
-                                <span class="form-colorinput-color bg-azure"></span>
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <label class="form-colorinput">
-                                <input name="color" type="radio" value="indigo" class="form-colorinput-input">
-                                <span class="form-colorinput-color bg-indigo"></span>
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <label class="form-colorinput">
-                                <input name="color" type="radio" value="purple" class="form-colorinput-input">
-                                <span class="form-colorinput-color bg-purple"></span>
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <label class="form-colorinput">
-                                <input name="color" type="radio" value="pink" class="form-colorinput-input">
-                                <span class="form-colorinput-color bg-pink"></span>
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <label class="form-colorinput">
-                                <input name="color" type="radio" value="red" class="form-colorinput-input">
-                                <span class="form-colorinput-color bg-red"></span>
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <label class="form-colorinput">
-                                <input name="color" type="radio" value="orange" class="form-colorinput-input">
-                                <span class="form-colorinput-color bg-orange"></span>
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <label class="form-colorinput">
-                                <input name="color" type="radio" value="yellow" class="form-colorinput-input">
-                                <span class="form-colorinput-color bg-yellow"></span>
-                            </label>
-                        </div>
-                        <div class="col-auto">
-                            <label class="form-colorinput">
-                                <input name="color" type="radio" value="lime" class="form-colorinput-input">
-                                <span class="form-colorinput-color bg-lime"></span>
-                            </label>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="form-label">Visibility</label>
+                            <select class="form-select">
+                                <option value="1" selected="">Private</option>
+                                <option value="2">Public</option>
+                                <option value="3">Hidden</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <label class="form-label">Additional info</label>
-                    <textarea class="form-control"></textarea>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Client name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Reporting period</label>
+                            <input type="date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div>
+                            <label class="form-label">Additional information</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Add Team</button>
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </a>
+                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Create new report
+                </a>
             </div>
         </div>
     </div>
@@ -355,3 +372,4 @@
 
 </body>
 </html>
+

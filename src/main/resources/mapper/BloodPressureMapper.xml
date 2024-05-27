@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.smartpersionsys.mapper.BloodPressureMapper">
+
+
+    <!-- List<BloodPressure> getAll(); -->
+    <select id="getAll" resultType="BloodPressure">
+        select * from t_bloodpressure
+    </select>
+    <!-- -->
+    <select id="getDateByTimes" resultType="BloodPressure">
+        select * from t_bloodpressure
+        where older_id=#{olderId} and date BETWEEN #{prep} AND #{now}
+    </select>
+
+</mapper>

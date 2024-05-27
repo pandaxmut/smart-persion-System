@@ -20,6 +20,14 @@ Spring:
       exclude: static/**
   mvc:
     static-path-pattern=/static/**:
+    use-forward-headers: true
+
+
+# 上传文件总的最大值
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 5MB # 单个文件的最大值(注：springboot默认的文件大小限制为1M)
 
 #  mvc:
 #    static-path-pattern: /static/**
@@ -30,6 +38,10 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-
-
+#重点：pagehelper配置-分页插件
+pagehelper:
+  helper-dialect: mysql #数据库
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
 

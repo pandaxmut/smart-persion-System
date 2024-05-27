@@ -4,6 +4,7 @@ import com.edu.smartpersionsys.mapper.FamilyMapper;
 import com.edu.smartpersionsys.mapper.SymptomRecordMapper;
 import com.edu.smartpersionsys.pojo.Family;
 import com.edu.smartpersionsys.pojo.Symptoms;
+import com.edu.smartpersionsys.service.OlderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +20,10 @@ class SmartPersionSysApplicationTests {
 	private FamilyMapper familyMapper;
 	@Autowired
 	private SymptomRecordMapper symptomRecordMapper;
+
+	@Autowired
+	private OlderService olderService;
+
 	@Test
 	void contextLoads() {
 	}
@@ -37,6 +42,11 @@ class SmartPersionSysApplicationTests {
 		SimpleDateFormat  sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String format = sdf.format(date);
 		List<Symptoms> symptoms = symptomRecordMapper.getSymptomNameAndCountByDate(format);
+	}
+
+	@Test
+	void getIncrease(){
+		olderService.getIncrease(7);
 	}
 
 }
