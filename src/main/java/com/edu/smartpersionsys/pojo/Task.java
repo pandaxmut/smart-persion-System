@@ -22,12 +22,14 @@ public class Task {
     //当前任务状态
     private String status;
     //接收者 志愿者id
-    private int vId;
+    private Integer vId;
+    //志愿者
+    private Volunteer volunteer;
 
     public Task() {
     }
 
-    public Task(Integer id, String task, String description, Date taskStartTime, Integer taskContinueTime, String status, int vId) {
+    public Task(int id, String task, String description, Date taskStartTime, int taskContinueTime, String status, int vId, Volunteer volunteer) {
         this.id = id;
         this.task = task;
         this.description = description;
@@ -35,5 +37,6 @@ public class Task {
         this.taskContinueTime = taskContinueTime;
         this.status = status;
         this.vId = vId;
+        this.volunteer = volunteer;
     }
 }

@@ -44,7 +44,7 @@ public class OlderController {
     //http://localhost:8080/old
     //访问老人管理页
     @RequestMapping("/old")
-    public String getAll(Model model,
+    public String getAllAndSearch(Model model,
                          @RequestParam(value = "pageIndex", required = false, defaultValue = "1") Integer pageIndex,
                          @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize,
                          @RequestParam(value = "findOlderName", required =false,defaultValue = "无") String findOlderName){
@@ -76,8 +76,6 @@ public class OlderController {
             //文件上传的地址
             String path = ResourceUtils.getURL("classpath:").getPath() + "static/media/photo";
             String realPath = path.replace('/', '\\').substring(1, path.length());
-            //用于查看路径是否正确
-            System.out.println(realPath);
             //获取文件的名称
             final String fileName = photoFile.getOriginalFilename();
             //限制文件上传的类型

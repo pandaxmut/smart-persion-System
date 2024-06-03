@@ -22,11 +22,18 @@
 
 </head>
 <body>
-
+<h1 th:text="${session.user.userRole}"></h1>
 <div class="wrapper">
     <aside th:replace="index::index_aside" class="navbar navbar-vertical navbar-expand-lg navbar-dark">
         <!--白色侧边栏：navbar-transparent-->
     </aside>
+    <h1 th:if="${session.user.userRole == '志愿者'}"
+        class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+        <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
+            <li class="breadcrumb-item"><a th:href="@{/2/volunteers}">主页</a></li>
+            <li class="breadcrumb-item"><a href="#">志愿者大厅</a></li>
+        </ol>
+    </h1>
     <div class="page-wrapper">
         <div class="container-xl">
             <!-- Page title -->
@@ -141,18 +148,19 @@
                                 <td th:text="${task.taskContinueTime}"></td>
                                 <!--接收人-->
                                 <td  class="text-nowrap text-muted">
-                                    <span th:if="${task.vId}==0" th:text="无" >熊二</span>
-                                    <span th:if="${task.vId} !=0" th:text="${task.vid}">熊大</span>
+                                    <span th:if="${task.volunteer == null}" th:text="无" >熊二</span>
+                                    <span th:if="${task.volunteer != null }" th:text="${task.volunteer.vName}">熊大</span>
                                 </td>
                                 <!--完成情况-->
                                 <td class="text-nowrap" th:text="${task.status}"></td>
                                 <!--操作-->
                                 <td>
                                     <!--判断，只有管理员才能删除-->
-                                    <a  th:if="${session.user.userRole} == '管理员'" class="btn btn-outline-danger" th:href="@{'schedule/over/'+${task.Id}}">
+                                    <a  th:if="${session.user.userRole} eq '管理员'" class="btn btn-outline-danger" th:href="@{'schedule/over/'+${task.Id}}">
                                         结束
                                     </a>
-                                    <a th:if="${session.user.userRole} == '志愿者'" class="btn btn-outline-success" href="">
+                                    <a th:if="${session.user.userRole eq '志愿者' and task.volunteer ==null }" class="btn btn-outline-success"
+                                        th:href="@{'/volunteerGetTask/'+ ${task.id}}">
                                         接收
                                     </a>
                                 </td>
@@ -244,7 +252,9 @@
     </form>
 </div>
 
-
+<script th:if="${volunteerGetTaskMsg} == '1'" type="text/javascript">
+    alert("成功参与活动，感谢您为社会贡献一份力量！");
+</script>
 <script th:if="${addTaskMsg} == '1'" type="text/javascript">
     alert("添加成功");
 </script>
@@ -255,5 +265,8 @@
 <script th:if="${findMsg} == '0'" type="text/javascript">
     alert("没有相关活动，在找找看！");
 </script>
+
+
+
 </body>
 </html>

@@ -1,6 +1,5 @@
 package com.edu.smartpersionsys.mapper;
 
-import com.edu.smartpersionsys.pojo.Family;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

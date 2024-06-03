@@ -45,12 +45,61 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public void addVolunteerTime(int taskId) {
         Task task = taskMapper.getTaskById(taskId);
+        System.out.println(task);
         //默认值等于0,不等于零说明有人接志愿活动了
-        if(task.getVId()!=0){
-            Volunteer v = volunteerMapper.getVolunteerById(task.getVId());
-            int time = task.getTaskContinueTime()+v.getTotalTime();
+        if(task.getVolunteer()!=null){
+            Volunteer v = volunteerMapper.getVolunteerByVId(task.getVolunteer().getVId());
+            int totalTime = 0;
+            int taskTotal = 0;
+            if(v.getTotalTime()!=null){
+                totalTime = v.getTotalTime() + task.getTaskContinueTime();
+                taskTotal = 1+v.getTaskTotal();
+            }else{
+                totalTime = task.getTaskContinueTime();
+                taskTotal +=1;
+            }
+            System.out.println("---------------------------------------------------");
+            System.out.println("taskTime = " + totalTime);
             //给接活动的人增加志愿时常
-            volunteerMapper.updateTotalTimeByVId(taskId,time);
+            volunteerMapper.updateTotalTimeByVId(v.getVId(),totalTime,taskTotal);
         }
+    }
+
+    @Override
+    public Volunteer getVolunteerByUserId(int userId) {
+        Volunteer volunteer = volunteerMapper.getVolunteerByUserId(userId);
+        return volunteer;
+    }
+
+    @Override
+    public Volunteer getVolunteerByVId(int vId) {
+        Volunteer volunteer = volunteerMapper.getVolunteerByVId(vId);
+        return volunteer;
+    }
+
+    @Override
+    public boolean updateVolunteerInfo(Volunteer volunteer) {
+        int flag = volunteerMapper.updatePhoneAndPhoto(volunteer);
+        if (flag==1)return true;
+        return false;
+    }
+
+    @Override
+    public boolean updateVolunteerPhone(Volunteer volunteer) {
+        int flag = volunteerMapper.updatePhone(volunteer);
+        if (flag==1)return true;
+        return false;
+    }
+
+    @Override
+    public List<Task> chechTask(int vId) {
+        return taskMapper.findTaskByVId(vId);
+    }
+
+    @Override
+    public boolean volunteerGetTask(int id, int vId) {
+        int i = taskMapper.updateTaskVIdById(id, vId);
+        if (i==1) return true;
+        return false;
     }
 }

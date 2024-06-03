@@ -1,9 +1,9 @@
 package com.edu.smartpersionsys;
 
-import com.edu.smartpersionsys.mapper.FamilyMapper;
 import com.edu.smartpersionsys.mapper.SymptomRecordMapper;
-import com.edu.smartpersionsys.pojo.Family;
+import com.edu.smartpersionsys.mapper.TaskMapper;
 import com.edu.smartpersionsys.pojo.Symptoms;
+import com.edu.smartpersionsys.pojo.Task;
 import com.edu.smartpersionsys.service.OlderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,7 @@ import java.util.List;
 @SpringBootTest
 class SmartPersionSysApplicationTests {
 
-	@Autowired
-	private FamilyMapper familyMapper;
+
 	@Autowired
 	private SymptomRecordMapper symptomRecordMapper;
 
@@ -28,13 +27,7 @@ class SmartPersionSysApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	void selectFamilyByUserIdTest(){
-		Family family = new Family();
-		family.setOlderId(12);
-		List<Family> families = familyMapper.allFamilyByOlderId(family);
-		families.forEach(System.out::println);
-	}
+
 
 	@Test
 	void getSymptomNameAndCountByDateTest(){
@@ -47,6 +40,14 @@ class SmartPersionSysApplicationTests {
 	@Test
 	void getIncrease(){
 		olderService.getIncrease(7);
+	}
+
+	@Autowired
+	private TaskMapper taskMapper;
+	@Test
+	void getTasks(){
+		List<Task> all = taskMapper.findAll();
+		all.forEach(System.out::println);
 	}
 
 }
