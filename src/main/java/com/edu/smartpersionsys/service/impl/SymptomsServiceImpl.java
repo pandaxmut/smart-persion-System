@@ -16,6 +16,11 @@ import java.util.List;
 public class SymptomsServiceImpl implements SymptomsService {
     @Autowired
     private SymptomRecordMapper symptomRecordMapper;
+
+    /**
+     * 返回不良症状表中的全部数据
+     * @return
+     */
     @Override
     public List<Symptoms> getAllSymptoms() {
         Date date = new Date();

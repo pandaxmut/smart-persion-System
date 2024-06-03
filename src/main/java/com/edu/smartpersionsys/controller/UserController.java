@@ -4,8 +4,10 @@ package com.edu.smartpersionsys.controller;
 import com.edu.smartpersionsys.mapper.UserMapper;
 import com.edu.smartpersionsys.pojo.Older;
 import com.edu.smartpersionsys.pojo.User;
+import com.edu.smartpersionsys.pojo.Volunteer;
 import com.edu.smartpersionsys.service.OlderService;
 import com.edu.smartpersionsys.service.UserService;
+import com.edu.smartpersionsys.service.VolunteerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +26,18 @@ public class UserController {
     private UserService userService;
     @Autowired
     private OlderService olderService;
+    @Autowired
+    private VolunteerService volunteerService;
 
 
 
 
-
-
-    //注册
+    //注册页面
     @GetMapping("/reg")
     public String reg(){
         return "register";
     }
-    //注册判断
+    //注册
     @PostMapping("/toReg")
     public String toReg(Model model, User user,String confirmPwd){
         System.out.println("userRole:"+user.getUserRole());
@@ -45,9 +47,12 @@ public class UserController {
             //先判断user表中的用户是否存在
             if(!userService.isSameByNameAndRole(user)){
                 //注册
-                userService.register(user);
-                //新增一个老人
-                Older older = olderService.addOlder(user.getUserId(),user.getUserName());
+                boolean register = userService.register(user);
+                if(register){
+                    model.addAttribute("msg","注册成功");
+                }else{
+                    model.addAttribute("msg","注册失败");
+                }
             }else{
                 //返回错误信息
                 model.addAttribute("msg","用户已存在");
@@ -55,6 +60,7 @@ public class UserController {
         }else{
             model.addAttribute("msg","账号密码不一致");
         }
+
         return "login";
     }
 
@@ -69,10 +75,6 @@ public class UserController {
     //简单的登录判断
     @PostMapping("/toLogin")
     public String login(@Validated User user , Model model, HttpSession session, RedirectAttributes redirect){
-        System.out.println("userName = " + user.getUserName());
-        System.out.println(user.getUserPassword());
-        System.out.println(user.getUserRole());
-
         //判断用户是否登录成功
         User u = userService.login(user);
         model.addAttribute("msg","登录成功！");
@@ -92,7 +94,9 @@ public class UserController {
             } else if (user.getUserRole().equals("家属")){
                 return "redirect:/familyPage";
             }else{
-                return "redirect:/volunteers";
+                Volunteer volunteer = volunteerService.getVolunteerByUserId(u.getUserId());
+                session.setAttribute("volunteer",volunteer);
+                return "redirect:/"+ volunteer.getVId()+ "/volunteers";
             }
         }
     }
@@ -117,17 +121,5 @@ public class UserController {
 
 
 
-    //护工页面
-    @GetMapping("/nursePage")
-    @ResponseBody
-    public String nursePage(){
-        return "护工页面";
-    }
-    //家属页面
-    @GetMapping("/familyPage")
-    @ResponseBody
-    public String familyPage(){
-        return "家属页面";
-    }
 
 }
