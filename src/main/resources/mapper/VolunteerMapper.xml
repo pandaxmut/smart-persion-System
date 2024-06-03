@@ -5,13 +5,41 @@
 <mapper namespace="com.edu.smartpersionsys.mapper.VolunteerMapper">
 
 
-    <!-- Volunteer getVolunteerById(int vid);-->
-    <select id="getVolunteerById" resultType="volunteer">
+    <!-- Volunteer getVolunteerByVId(int vid);-->
+    <select id="getVolunteerByVId" resultType="volunteer">
         select * from t_volunteers where v_id=#{vId}
     </select>
 
-    <!--int addTotalTimeByVId(int vId); -->
-    <update id="addTotalTimeByVId" >
-        update t_volunteers set total_time=#{count} where v_id=#{vId}
+
+    <!-- Volunteer getVolunteerByUserId(int userId);-->
+    <select id="getVolunteerByUserId" resultType="volunteer">
+        select * from t_volunteers where user_id=#{userId}
+    </select>
+
+
+<!--  int updateTotalTimeByVId(@Param("vId") int vId,@Param("totalTime") int totalTime,@Param("taskTotal") int taskTotal);-->
+    <update id="updateTotalTimeByVId" >
+        update t_volunteers set total_time=#{totalTime}, task_total=#{taskTotal} where v_id=#{vId}
     </update>
+
+    <!-- int updatePhone(Volunteer volunteer); -->
+    <update id="updatePhone" >
+        update t_volunteers set v_phone=#{vPhone} where v_id=#{vId}
+    </update>
+
+    <!-- int updatePhoneAndPhoto(Volunteer volunteer); -->
+    <update id="updatePhoneAndPhoto" >
+        update t_volunteers set v_name_photo=#{vNamePhoto}, v_phone=#{vPhone} where v_id=#{vId}
+    </update>
+
+    <!-- int insert(int userId,String userName);-->
+    <insert id="insert">
+        insert into t_volunteers(user_id,v_name) value (#{userId},#{vName})
+    </insert>
+
+    <!--List<Task> findTaskByVId(int vId);-->
+    <select id="findTaskByVId" resultType="task">
+        select * from task where v_id=#{vId}
+    </select>
+
 </mapper>

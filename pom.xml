@@ -58,6 +58,30 @@
 			<version>3.0.3</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Spring Boot WebSocket依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<!--分页插件pagehelper-->
+		<!--pagehelper分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.squareup.okhttp3</groupId>
+		    <artifactId>okhttp</artifactId>
+		    <version>4.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin.external.google</groupId>
+			<artifactId>android-json</artifactId>
+			<version>0.0.20131108.vaadin1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -74,6 +98,9 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+
+
 		</plugins>
 	</build>
 
