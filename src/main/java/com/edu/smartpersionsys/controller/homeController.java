@@ -41,8 +41,13 @@ public class homeController {
         return "index";
     }
 
-    //使用ajax 生成图表；
-    // 问题：冗余，可以提升的地方：AOP、泛型
+
+// 问题：冗余，可以提升的地方：AOP、泛型
+    /**
+     * 获得不良症状的统计数据
+     * @return
+     * @throws JsonProcessingException
+     */
     @ResponseBody
     @RequestMapping("/getData")
     public String getData() throws JsonProcessingException {
@@ -84,11 +89,6 @@ public class homeController {
         String jsonData = objectMapper.writeValueAsString(olderIncrease);
         System.out.println("jsonData:"+jsonData);
         return jsonData;
-    }
-
-    @GetMapping("/message")
-    public String message(){
-        return "message";
     }
 
 }

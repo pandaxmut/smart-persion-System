@@ -61,13 +61,10 @@ public class OlderServiceImpl implements OlderService {
         return flag;
     }
 
+    //查找近多少天入住率
     @Override
     public OlderIncrease getIncrease(int num) {
         OlderIncrease olderIncrease = new OlderIncrease();
-
-//        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-//        String date = sdf.format(new Date());
-//        System.out.println(date);
         //获取近七天的注册的人数
         LocalDate today = LocalDate.now(); //当前日期
         String today_time = today.toString();
@@ -87,7 +84,6 @@ public class OlderServiceImpl implements OlderService {
         } else {
             d = (count - count2) * 100 / count2;
         }
-
         olderIncrease.setConversionRate(d);
         //入住率
         int total = olderMapper.findAll().size();
@@ -101,7 +97,6 @@ public class OlderServiceImpl implements OlderService {
         LocalDate now = LocalDate.now();
         LocalDate prep = now.minusMonths(num);
         System.out.println(prep + "  " + now);
-
         return bloodPressureMapper.getDateByTimes(olderId, prep.toString(), now.toString());
     }
 
