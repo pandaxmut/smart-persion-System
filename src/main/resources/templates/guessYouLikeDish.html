@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>猜你喜欢</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+
+</head>
+<body>
+    <nav  style="--bs-breadcrumb-divider: '>'; margin: 24px" aria-label="breadcrumb">
+        <ol class="breadcrumb"  style="font-size: x-large">
+            <li class="breadcrumb-item"><a href="#">主页</a></li>
+            <li class="breadcrumb-item active" aria-current="page">猜你喜欢</li>
+         </ol>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 card">
+                <div class="card-status-top bg-danger"></div>
+                <div class="card-body">
+                    <h3 class="card-title">吃过的早餐</h3>
+                    <div class="mb-3">
+                        <div th:each="food :${cf.eat}" class="form-selectgroup">
+                            <label class="form-selectgroup-item">
+                                <input type="checkbox" name="name" th:value="${food}" class="form-selectgroup-input" checked />
+                                <span th:text="${food}" class="form-selectgroup-label" >HTML</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-6 card">
+                <div class="card-status-top bg-danger"></div>
+                <div class="card-body">
+                    <h3 class="card-title">早餐推荐</h3>
+                    <div class="table-responsive">
+                        <table
+                                class="table table-vcenter table-nowrap">
+                            <thead>
+                            <tr>
+                                <td></td>
+                                <td>食物</td>
+                                <td>推荐分数</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="entry : ${cf.recommendFoods}" th:if="${entry.value}>0">
+                                <th></th>
+                                <th  th:text="${cf.dishAll.get((entry.key)-1).dishName }"></th>
+                                <th  th:text="${entry.value}"></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-status-top bg-danger"></div>
+            <div class="card-body">
+                <h3 class="card-title">早餐相似度矩阵</h3>
+                <div class="table-responsive">
+                    <table
+                            class="table table-vcenter table-nowrap">
+                        <thead>
+                        <tr>
+                            <td></td>
+                            <td th:each="entry: ${cf.sm}" th:text="${entry.key}"></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="entry : ${cf.sm}">
+                            <th  th:text="${entry.key}"></th>
+                            <td th:each="value : ${entry.value}" th:text="${value}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+<script src="https://tabler.bootmb.com/dist/libs/apexcharts/dist/apexcharts.min.js"></script><!-- Libs JS -->
+
+</body>
+</html>

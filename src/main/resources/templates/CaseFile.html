@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>病例档案</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--    <link rel="stylesheet" href="/bootstrap-5.3.0/css"/>-->
+    <!--    <script src="/bootstrap-5.3.0/js"></script>-->
+    <!--    <link th:href="@{/bootstrap-5.3.0/css/bootstrap.css}" type="text/css" rel="stylesheet"/>-->
+    <!--    <link th:href="@{/bootstrap-table/dist/bootstrap-table.css}" type="text/css" rel="stylesheet"/>-->
+    <!--    <script th:src="@{/bootstrap-5.3.0/js/bootstrap.js}" type="text/javascript" ></script>-->
+    <!--    <script th:src="@{/bootstrap-table/dist/bootstrap-table.js}" type="text/javascript"></script>-->
+    <!--    <script th:src="@{/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js}" type="text/javascript"></script>-->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
+
+
+<body>
+
+<div class="wrapper">
+    <aside th:replace="index::index_aside" class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+        <!--白色侧边栏：navbar-transparent-->
+    </aside>
+    <div class="page-wrapper">
+        <div class="container-xl">
+            <!-- Page title -->
+            <div class="page-header d-print-none">
+                <div class="">
+                    <center><h1>病例档案存放处</h1></center>
+                </div>
+            </div>
+        </div>
+        <div class="page-body">
+            <div class=" border-bottom py-3">
+                <div class="d-flex">
+                    <form action="/getById" method="post">
+                        <div class="row">
+                            <div class="input-group mb-2 col">
+                                <span class="input-group-text">老人ID</span>
+                                <input type="text" class="form-control" placeholder="username" autocomplete="off">
+                            </div>
+                            <div class="input-group mb-2 col">
+                                <span class="input-group-text">老人ID</span>
+                                <input type="text" class="form-control" placeholder="username" autocomplete="off">
+                            </div>
+                            <div class="my-2 col-auto">
+                                <button type="submit" class="btn btn-outline-success">Go!</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                <a th:href="@{'AddCaseFile'}" class="btn btn-outline-primary w-80 ">
+                    新增
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap datatable">
+                    <thead>
+                    <tr>
+                        <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox"
+                                               aria-label="Select all invoices"></th>
+
+                        <th scope="col">ID</th>
+                        <th scope="col">老人ID</th>
+                        <th scope="col">姓名</th>
+                        <th scope="col">诊断结果</th>
+                        <th scope="col">治疗方案</th>
+                        <th scope="col">记录日期</th>
+                        <th scope="col">身份证号</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="casefile:${casefile}">
+                        <td class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox"
+                                               aria-label="Select all invoices"></td>
+
+                        <td th:text="${casefile.id}"></td>
+                        <td th:text="${casefile.olderId}"></td>
+                        <td th:text="${casefile.name}"></td>
+                        <td th:text="${casefile.diagnosis}"></td>
+                        <td th:text="${casefile.treatment}"></td>
+                        <td th:text="${casefile.recordDate}"></td>
+                        <td th:text="${casefile.idCard}"></td>
+                        <td>
+                            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                                <a href="#" class="btn btn-outline-primary w-80 " data-bs-toggle="modal"
+                                   th:data-bs-target="'#modal-edit-'+ ${casefile.id}" data-bs-target="#model-edit">
+                                    修改信息
+                                </a>
+                            </div>
+                            <div class="modal modal-blur fade" th:id="'modal-edit-'+ ${casefile.id}" role="dialog"
+                                 tabindex="-1" aria-hidden="true">
+                                <form action="/caseFile/edit" method="post" enctype="multipart/form-data">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">修改信息</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-auto">
+                                                    <label class="form-label">老人ID</label>
+                                                    <input type="hidden" name="olderId" th:value="${casefile.olderId}"
+                                                           class="form-control">
+                                                    <input type="text" name="olderId" th:value="${casefile.olderId}"
+                                                           value="熊熊熊熊熊熊" disabled="disabled"
+                                                           class="form-control">
+                                                </div>
+
+                                                <div class="row mb-3 align-items-end">
+                                                    <div class="col-auto">
+                                                        <label class="form-label">姓名</label>
+                                                        <input type="hidden" name="name" th:value="${casefile.name}">
+                                                        <input type="text" name="name" th:value="${casefile.name}"
+                                                               value="熊熊熊熊熊熊" disabled="disabled"
+                                                               class="form-control">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label class="form-label">身份证号</label>
+                                                        <input type="text" name="idCard" th:value="${casefile.idCard}"
+                                                               th:placeholder="${casefile.idCard}" placeholder="123123"
+                                                               class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3 align-items-end">
+
+                                                    <!--                                                                <div class="col-4" th:switch="${older.olderGender}">-->
+                                                    <!--                                                                    <label class="form-label">性别</label>-->
+                                                    <!--                                                                    <input type="text" th:case="1"  name="olderGender"  th:value="${older.olderGender}" placeholder="男"  class="form-control">-->
+                                                    <!--                                                                    <input type="text" th:case="2"  name="olderGender"  th:value="${older.olderGender}" placeholder="女"  class="form-control">-->
+
+                                                    <!--                                                                </div>-->
+                                                    <div class="col-4">
+                                                        <label class="form-label">诊断结果</label>
+                                                        <input type="text" name="diagnosis"
+                                                               th:value="${casefile.diagnosis}"
+                                                               th:placeholder="${casefile.diagnosis}"
+                                                               placeholder="请输入诊断结果" class="form-control">
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <label class="form-label">治疗方案</label>
+                                                        <input type="text" name="treatment"
+                                                               th:value="${casefile.treatment}"
+                                                               th:placeholder="${casefile.treatment}"
+                                                               placeholder="请输入治疗方案" class="form-control">
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <label class="form-label">记录日期</label>
+                                                        <input type="text" name="recordDate"
+                                                               th:value="${casefile.recordDate}"
+                                                               th:placeholder="${casefile.recordDate}"
+                                                               placeholder="请输入治疗方案" class="form-control">
+                                                    </div>
+
+                                                </div>
+                                                <!--                                                            <div>-->
+                                                <!--                                                                <label class="form-label">描述信息</label>-->
+                                                <!--                                                                <textarea class="form-control" name="olderDescription" th:text="${older.olderDescription}"  placeholder="请输入描述信息"></textarea>-->
+                                                <!--                                                            </div>-->
+                                                <div>
+                                                    <label class="form-label">上传头像</label>
+                                                    <input type="file" class="form-control" name="photoFile"
+                                                           placeholder="请上传头像"></input>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn me-auto" data-bs-dismiss="modal">关闭
+                                                </button>
+                                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                                                    提交
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                                <a th:href="@{'/delete/'+${casefile.id}}" class="btn btn-outline-primary w-80 ">
+                                    删除信息
+                                </a>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer d-flex align-items-center">
+
+                <ul class="pagination m-0 ms-auto">
+                    <!--            <li  class="page-item disabled">-->
+                    <li th:class="${pageInfo.hasPreviousPage()} ? 'page-item' : 'page-item disabled'">
+                        <a th:if="${pageInfo.hasPreviousPage()}" class="page-link"
+                           th:href="@{'?pageNum=' + ${pageInfo.prePage}}" tabindex="-1" aria-disabled="true">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <polyline points="15 6 9 12 15 18"></polyline>
+                            </svg>
+                            上一页
+                        </a>
+                    </li>
+                    <li th:each="i : ${#numbers.sequence(1, pageInfo.pages)}"
+                        th:class="${i == pageInfo.pageNum} ? 'page-item active' : 'page-item'">
+                        <a class="page-link" th:href="@{'?pageNum=' + ${i}}" th:text="${i}"></a>
+                    </li>
+
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li th:class="${pageInfo.hasNextPage()} ? 'page-item' : 'page-item disabled'">
+                        <a th:if="${pageInfo.hasNextPage()}" class="page-link"
+                           th:href="@{'?pageNum=' + ${pageInfo.nextPage}}" tabindex="-1" aria-disabled="true">
+                            下一页
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <polyline points="9 6 15 12 9 18"></polyline>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+
+
+<!--<div class="as">-->
+<!--    <div class="as one">-->
+<!--        当前第<span th:text="${studentPageInfo.pageNum}"></span> 页，-->
+<!--        共<span th:text="${studentPageInfo.pages}"></span> 页，-->
+<!--        <span th:text="${studentPageInfo.total}"></span>条记录-->
+<!--    </div>-->
+<!--    <ul class="as current" style="list-style: none">-->
+<!--        &lt;!&ndash;th:if="${studentPageInfo.hasPreviousPage}"}&ndash;&gt;-->
+<!--        <li th:if="${studentPageInfo.hasPreviousPage}"}>&lt;!&ndash;hasPreviousPage默认值为false， 如果有上一页，则不显示首页&ndash;&gt;-->
+<!--            <a th:href="@{/list?pageNum=}+${1}">首页</a>-->
+<!--        </li>-->
+<!--        <li th:if="${studentPageInfo.hasPreviousPage}">&lt;!&ndash;hasPreviousPage默认值为false， 如果有上一页，则不显示&ndash;&gt;-->
+<!--            <a th:href="@{/list?pageNum=}+${studentPageInfo.prePage}">上一页</a>-->
+<!--        </li>-->
+<!--        <li th:each="nav:${studentPageInfo.navigatepageNums}">&lt;!&ndash;navigatepageNums是一个数组：遍历所有导航页号。 &ndash;&gt;-->
+<!--            <a th:href="@{/list?pageNum=}+${nav}" th:text="${nav}" th:if="${nav != studentPageInfo.pageNum}"></a>&lt;!&ndash;如果不是当前页则可以跳转其他页面。遍历展示&ndash;&gt;-->
+<!--            <a th:class="${'active'}" th:if="${nav == studentPageInfo.pageNum}" th:text="${nav}"></a>&lt;!&ndash;如果是当前页则有样式。遍历 展示&ndash;&gt;-->
+<!--        </li>-->
+<!--        <li th:if="${studentPageInfo.hasNextPage}">&lt;!&ndash;hasNextPage默认值为false， 如果没有下一页，则不显示&ndash;&gt;-->
+<!--            <a th:href="@{/list?pageNum=}+${studentPageInfo.nextPage}">下一页</a>-->
+<!--        </li>-->
+<!--        <li th:if="${studentPageInfo.pageNum < studentPageInfo.pages}">&lt;!&ndash;如果当前页小于总页数则不显示尾页 &ndash;&gt;-->
+<!--            <a th:href="@{/list?pageNum=}+${studentPageInfo.pages}">尾页</a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+
+<!--        <p class="m-0 text-muted" data-sider-select-id="8fcd8b0b-6580-4ed2-917a-32e5ef9a0d43">Showing <span>1</span> to-->
+<!--            <span>8</span> of <span>16</span> entries</p>-->
+
+

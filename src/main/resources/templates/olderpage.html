@@ -187,21 +187,8 @@
                     </div>
                     <div class="col-4">
                         <div class="card">
-                            <a href="#" class="btn btn-outline-warning w-100 h-100" data-bs-toggle="modal"  data-bs-target="#modal-Schedule"><h1>每日活动</h1></a>
-                            <div  class="modal modal-blur fade"  id="modal-Schedule"
-                                  tabindex="-1" style="display: none;" aria-hidden="true">
-                                <div  class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">每日活动</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            暂未实现查看每日活动功能...
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <a th:href="@{'/guessDish/'+${older.olderId}}" class="btn btn-outline-warning w-100 h-100" ><h1>猜你喜欢</h1></a>
+
                         </div>
                     </div>
 

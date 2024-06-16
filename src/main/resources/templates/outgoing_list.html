@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>外出档案管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--    <link rel="stylesheet" href="/bootstrap-5.3.0/css"/>-->
+    <!--    <script src="/bootstrap-5.3.0/js"></script>-->
+    <!--    <link th:href="@{/bootstrap-5.3.0/css/bootstrap.css}" type="text/css" rel="stylesheet"/>-->
+    <!--    <link th:href="@{/bootstrap-table/dist/bootstrap-table.css}" type="text/css" rel="stylesheet"/>-->
+    <!--    <script th:src="@{/bootstrap-5.3.0/js/bootstrap.js}" type="text/javascript" ></script>-->
+    <!--    <script th:src="@{/bootstrap-table/dist/bootstrap-table.js}" type="text/javascript"></script>-->
+    <!--    <script th:src="@{/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js}" type="text/javascript"></script>-->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
+
+
+</head>
+<body>
+
+<!--<script th:if="${msg} == '更新成功'" type="text/javascript">-->
+<!--    alert("更新成功");-->
+<!--</script>-->
+
+<!--<script th:if="${msg} == '更新失败'" type="text/javascript">-->
+<!--    alert("更新失败");-->
+<!--</script>-->
+<!--<script th:if="${msg} == '查无此人'" type="text/javascript">-->
+<!--    alert("查无此人");-->
+<!--</script>-->
+
+<div class="wrapper">
+    <aside th:replace="index::index_aside" class="navbar navbar-vertical navbar-expand-lg navbar-dark">
+        <!--白色侧边栏：navbar-transparent-->
+    </aside>
+    <div class="page-wrapper">
+        <div class="container-xl">
+            <!-- Page title -->
+            <div class="page-header d-print-none">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <!-- Page pre-title -->
+                        <div class="page-pretitle">
+                            welcome
+                        </div>
+                        <h2 class="page-title">
+                            we are family!
+                        </h2>
+                    </div>
+                    <!-- Page title actions -->
+                    <div class="col-auto ms-auto d-print-none">
+                        <div class="btn-list">
+                  <span class="d-none d-sm-inline">
+                    <a href="#" class="btn btn-white">
+                      New view
+                    </a>
+                  </span>
+                            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                               data-bs-target="#modal-report">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                                Create new report
+                            </a>
+                            <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
+                               data-bs-target="#modal-report" aria-label="Create new report">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-body">
+            <div class="container">
+                <form th:action="@{/old}" method="post">
+                    <div class="row col-6">
+                        <div class="input-group my-2 ">
+                            <input type="text" name="findOlderName" class="form-control" placeholder="Search for…">
+                            <button type="submit" class="btn">Go!</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="table-responsive">
+                            <table class="table table-vcenter card-table">
+                                <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>姓名</th>
+                                    <th>外出开始时间</th>
+                                    <th>外出结束时间</th>
+                                    <th>事由</th>
+                                    <th>状态</th>
+                                    <th class="w-30">操作</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="outgoing: ${outgoings}">
+                                    <td>
+                                        <div th:text="${outgoing.id}">Automation Specialist IV</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex py-1 align-items-center">
+                                                <span class="avatar me-2"
+                                                      th:style="'background-image: url('+${outgoing.older.olderPhoto} +')'"></span>
+                                            <div class="flex-fill">
+                                                <div th:text="${outgoing.older.olderName}" class="font-weight-medium">
+                                                    Lorry Mion
+                                                </div>
+                                                <div class="text-muted"><p th:text="${outgoing.older.olderPhone}"
+                                                                           class="text-reset">
+                                                    lmiona@livejournal.com</p></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div th:text="${outgoing.startTime}">Automation Specialist IV</div>
+                                    </td>
+                                    <td>
+                                        <div th:text="${outgoing.endTime}">Automation Specialist IV</div>
+                                    </td>
+                                    <td>
+                                        <div th:text="${outgoing.reason}">Automation Specialist IV</div>
+                                        <div class="text-muted">Accounting</div>
+                                    </td>
+                                    <td>
+                                        <div th:text="${outgoing.status}">Automation Specialist IV</div>
+                                    </td>
+
+                                    <td>
+                                        <a th:href="@{del(id=${outgoing.id})}" class="btn btn-outline-warning w-10" >删除</a>
+                                        <!--编辑-->
+                                    </td>
+                                    <div  class="modal modal-blur fade"  th:id="'modal-edit-'+ ${outgoing.id}" id="model-edit"
+                                          tabindex="-1" style="display: none;" aria-hidden="true">
+                                        <form action="/editOlderInfo" method="post" enctype="multipart/form-data">
+                                            <div  class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="col-auto">
+                                                            <label class="form-label" hidden="hidden">olderId</label>
+                                                            <input type="hidden" name="olderId"  th:value="${outgoing.id}"  class="form-control">
+                                                        </div>
+                                                        <div class="row mb-3 align-items-end">
+                                                            <div class="col-auto">
+                                                                <label class="form-label">id</label>
+                                                                <input type="hidden" name="id" th:value="${outgoing.id}">
+                                                                <input type="text" name="id"  th:value="${outgoing.id}" value="熊熊熊熊熊熊"  disabled="disabled"  class="form-control">
+                                                            </div>
+                                                            <div class="col">
+                                                                <label class="form-label">姓名</label>
+                                                                <input type="text"  name="olderPhone" th:value="${outgoing.older.olderName}" th:placeholder="${outgoing.id}" placeholder="18292928978"  class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div class="col">
+                                                                <label>外出开始时间:</label>
+                                                                <input  type="datetime-local" name="startTime" th:text="${outgoing.startTime}">
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <label>外出结束时间:</label>
+                                                                <input  type="datetime-local" name="endTime" th:text="${outgoing.endTime}">
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div class="col">
+                                                                <label>事由:</label>
+                                                                <input  type="text" name="reason" th:text="${outgoing.reason}">
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <label>状态:</label>
+                                                                <input  type="text" name="status" th:text="${outgoing.status}">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn me-auto" data-bs-dismiss="modal">关闭</button>
+                                                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">提交</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </tr>
+                                    <a href="/addPage" class="btn btn-outline-warning w-10" data-bs-toggle="modal"
+                                       data-bs-target="#modal-addOutgoing">
+                                        新增
+                                    </a>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--welcome top-->
+
+</div>
+
+<div>
+</div>
+
+
+<!--模态框组件 new view， create new report-->
+<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New report</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" name="example-text-input" placeholder="Your report name">
+                </div>
+                <label class="form-label">Report type</label>
+                <div class="form-selectgroup-boxes row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-selectgroup-item">
+                            <input type="radio" name="report-type" value="1" class="form-selectgroup-input" checked="">
+                            <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Simple</span>
+                      <span class="d-block text-muted">Provide only basic data needed for the report</span>
+                    </span>
+                  </span>
+                        </label>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-selectgroup-item">
+                            <input type="radio" name="report-type" value="1" class="form-selectgroup-input">
+                            <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Advanced</span>
+                      <span class="d-block text-muted">Insert charts and additional advanced analyses to be inserted in the report</span>
+                    </span>
+                  </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="mb-3">
+                            <label class="form-label">Report url</label>
+                            <div class="input-group input-group-flat">
+                    <span class="input-group-text">
+                      https://tabler.io/reports/
+                    </span>
+                                <input type="text" class="form-control ps-0" value="report-01" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="form-label">Visibility</label>
+                            <select class="form-select">
+                                <option value="1" selected="">Private</option>
+                                <option value="2">Public</option>
+                                <option value="3">Hidden</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Client name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Reporting period</label>
+                            <input type="date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div>
+                            <label class="form-label">Additional information</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </a>
+                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Create new report
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模态框组件 新增外出记录-->
+<div class="modal modal-blur fade" id="modal-addOutgoing" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <form action="/add" method="post" th:object="${outgoing}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">新增外出记录</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="model-body">
+                    <label>ID:</label>
+                    <input class="form-control" type="text" name="id">
+                    <label>old_Id:</label>
+                    <input class="form-control" type="text" name="olderId">
+                    <label>外出开始时间:</label>
+                    <input class="form-control" type="datetime-local" name="startTime">
+                    <label>外出结束时间:</label>
+                    <input class="form-control" type="datetime-local" name="endTime">
+                    <label>事由:</label>
+                    <input class="form-control" type="text" name="reason">
+                    <label>状态:</label>
+                    <input class="form-control"  type="text" name="status" >
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">提交</button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

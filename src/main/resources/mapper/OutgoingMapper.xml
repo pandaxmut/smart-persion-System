@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.smartpersionsys.mapper.OutgoingMapper">
+
+
+    <resultMap id="getOutgoingsResultMap" type="outgoing">
+        <id column="id" property="id"/>
+        <result column="older_id" property="older.olderId"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time"   property="endTime"/>
+        <result column="reason"   property="reason"/>
+        <result column="status"   property="status"/>
+        <association property="older" javaType="older">
+            <id column="older_id" property="olderId"/>
+            <result column="older_name" property="olderName"/>
+            <result column="older_phone"   property="olderPhone"/>
+            <result column="older_gender" property="olderGender"/>
+            <result column="older_status"   property="olderStatus"/>
+            <result column="older_roomNum"   property="olderRoomNum"/>
+            <result column="older_description" property="olderDescription"/>
+            <result column="older_photo"   property="olderPhoto"/>
+            <result column="date" property="date"/>
+        </association>
+    </resultMap>
+
+    <!--    <resultMap id="delResultMap" type="del">-->
+    <!--        <id column="id" property="id"/>-->
+    <!--        <result column="older_id" property="older.olderId"/>-->
+    <!--        <result column="start_time" property="startTime"/>-->
+    <!--        <result column="end_time"   property="endTime"/>-->
+    <!--        <result column="reason"   property="reason"/>-->
+    <!--        <result column="status"   property="status"/>-->
+    <!--        <association property="older" javaType="older">-->
+    <!--            <id column="older_id" property="olderId"/>-->
+    <!--            <result column="older_name" property="olderName"/>-->
+    <!--            <result column="older_phone"   property="olderPhone"/>-->
+    <!--            <result column="older_gender" property="olderGender"/>-->
+    <!--            <result column="older_status"   property="olderStatus"/>-->
+    <!--            <result column="older_roomNum"   property="olderRoomNum"/>-->
+    <!--            <result column="older_description" property="olderDescription"/>-->
+    <!--            <result column="older_photo"   property="olderPhoto"/>-->
+    <!--            <result column="date" property="date"/>-->
+    <!--        </association>-->
+    <!--    </resultMap>-->
+
+
+    <!--    List<Outgoing> getOutgoings()-->
+    <select id="getOutgoings" resultMap="getOutgoingsResultMap">
+        select  * from outgoing join older on outgoing.older_id=older.older_id
+    </select>
+    <delete id="del" parameterType="java.lang.Integer">
+        delete from outgoing where outgoing.id=#{id}
+    </delete>
+    <insert id="insert" parameterType="com.edu.smartpersionsys.pojo.Outgoing">
+        insert into outgoing (id,older_id,start_time,end_time,reason,status)
+        values(#{id},#{olderId},#{startTime},#{endTime},
+               #{reason},#{status})
+    </insert>
+</mapper>

@@ -1,10 +1,10 @@
 package com.edu.smartpersionsys.controller;
 
-import com.edu.smartpersionsys.pojo.BloodPressure;
-import com.edu.smartpersionsys.pojo.Older;
-import com.edu.smartpersionsys.pojo.Suggestions;
-import com.edu.smartpersionsys.pojo.User;
+import com.edu.smartpersionsys.mapper.DishMapper;
+import com.edu.smartpersionsys.mapper.DishScoreMapper;
+import com.edu.smartpersionsys.pojo.*;
 import com.edu.smartpersionsys.service.OlderService;
+import com.edu.smartpersionsys.utils.CF;
 import com.edu.smartpersionsys.utils.DataFromBackend;
 import com.edu.smartpersionsys.utils.VitalSignsData;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,9 +22,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class OlderController {
@@ -154,4 +154,26 @@ public class OlderController {
         }
         return "redirect:/"+older.getOlderId()+"/olderPage";
     }
+
+    @Autowired
+    private CF cf;
+    //使用基于物品的推荐系统猜测老人喜欢的食物
+    @GetMapping("guessDish/{olderId}")
+    public String guessDish(@PathVariable int olderId, Model model,HttpSession session){
+//        Older older = (Older)session.getAttribute("older");
+//        cf.setOlderId(older.getOlderId());
+        cf.setOlderId(olderId);
+        cf.cf();
+        System.out.println("------------------------------");
+        List<Map.Entry<Integer, Double>> recommendFoods = cf.getRecommendFoods();
+        recommendFoods.forEach(System.out::println);
+        model.addAttribute("cf",cf);
+        return "guessYouLikeDish";
+
+    }
+    @Autowired
+    private DishMapper dishMapper;
+    @Autowired
+    private DishScoreMapper dishScoreMapper;
+
 }
