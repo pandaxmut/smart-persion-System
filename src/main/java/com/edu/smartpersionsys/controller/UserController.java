@@ -91,8 +91,6 @@ public class UserController {
                 Older older = olderService.getOlderByUserId(u.getUserId());
                 session.setAttribute("older",older);
                 return "redirect:/"+older.getOlderId()+"/olderPage";
-            } else if (user.getUserRole().equals("家属")){
-                return "redirect:/familyPage";
             }else{
                 Volunteer volunteer = volunteerService.getVolunteerByUserId(u.getUserId());
                 session.setAttribute("volunteer",volunteer);
