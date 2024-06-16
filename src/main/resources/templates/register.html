@@ -1,68 +1,56 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>注册</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <!--    <link th:href="@{/bootstrap-5.3.0/css/bootstrap.css}" type="text/css" rel="stylesheet"/>-->
-    <!--    <link th:href="@{/bootstrap-table/dist/bootstrap-table.css}" type="text/css" rel="stylesheet"/>-->
-    <!--    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-
-    <!--    <script th:src="@{/bootstrap-5.3.0/js/bootstrap.js}" type="text/javascript" ></script>-->
-    <!--    <script th:src="@{/bootstrap-table/dist/bootstrap-table.js}" type="text/javascript"></script>-->
-    <!--    <script th:src="@{/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js}" type="text/javascript"></script>-->
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/bootstrap-5.3.0/css/style.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
-    <script src="https://tabler.bootmb.com/dist/libs/apexcharts/dist/apexcharts.min.js"></script><!-- Libs JS -->
-
-
 </head>
 <body>
-<div class="card">
-    <div class="row">
-        <div class="col-3">
-            <img src="https://tabler.bootmb.com/static/photos/2854fd67ddbd6217.jpg" class="w-100 h-100 object-cover" alt="Card side image">
-        </div>
-        <div class="col-1"></div>
-        <div class="col">
-            <div class="card-body">
-                <h1>注册</h1>
-                <div class="my-5 w-50">
-                    <p th:text="${msg}">msg :abc</p>
-                    <form th:action="@{/toReg}" method="post">
-                        <div class="container" style="height: auto" >
-
-                            <label for="userName">用户名：</label>
-                            <input class="form-control" type="text" id="userName" name="userName">
-                            <label for="userPassword">密码：</label>
-                            <input class="form-control" type="password" id="userPassword" name="userPassword">
-                            <label for="confirmPwd">确认密码：</label>
-                            <input class="form-control" type="password" id="confirmPwd" name="confirmPwd">
-                            <label for="userEmail">邮箱：</label>
-                            <input class="form-control" type="email" id="userEmail" name="userEmail">
-                            <br>
-                            <select class="form-select form-select mb-3" aria-label="select example" name="userRole">
-                                <option selected>选择一个角色类型</option>
-                                <option value="老人">老人</option>
-                                <option value="志愿者">志愿者</option>
-                            </select>
-
-                            <br>
-                            <div class="col-4 m-auto">
-                                <button type="submit" class="btn btn-outline-success w-100">
-                                    Success
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="video-background">
+    <video id="v1" autoplay loop muted width="800px">
+        <source th:src="@{/login.mp4}"/>
+    </video>
 </div>
+<div class="box" style="height: 550px;width: 400px">
+    <h1 style="color: whitesmoke">注册</h1>
+    <form th:action="@{/toReg}" method="post">
+        <div class="input-box">
+            <p th:text="${msg}">msg :abc</p>
+            <label for="userName">用户名：</label>
+            <input class="form-control" type="text" id="userName" name="userName">
+        </div>
+        <div class="input-box">
+            <label for="userPassword">密码：</label>
+            <input class="form-control" type="password" id="userPassword" name="userPassword">
+        </div>
+        <div class="input-box">
+            <label for="confirmPwd">确认密码：</label>
+            <input class="form-control" type="password" id="confirmPwd" name="confirmPwd">
+        </div>
+        <div class="input-box">
+            <label for="userEmail">邮箱：</label>
+            <input class="form-control" type="email" id="userEmail" name="userEmail">
+        </div>
+        <div class="input-box">
+            <label for="userPassword">角色：</label>
+            <select class="form-select form-select mb-3 w-10" aria-label="select example" name="userRole">
+                <option style="color: #0a0a0a" selected>选择一个角色类型</option>
+                <option style="color: #0a0a0a" value="老人">老人</option>
+                <option style="color: #0a0a0a" value="志愿者">志愿者</option>
+            </select>
+        </div>
+        <div class="btn-box">
+            <div>
+                <button type="submit" style="margin-left: 70px">注册</button>
+            </div>
+            <a href="/login">返回登录</a>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
 
+</script>
 </body>
 </html>

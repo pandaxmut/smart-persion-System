@@ -2,7 +2,9 @@ package com.edu.smartpersionsys.mapper;
 
 import com.edu.smartpersionsys.pojo.Suggestions;
 import com.edu.smartpersionsys.pojo.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public interface UserMapper {
     //通过name和 role 查找是否有相同的用户
     User selectByNameAndRole(User user);
 
-
+    @Insert("update user set user_phone_num=#{phoneNum} where user_id=#{id}")
+    int insertPhoneNum(@Param("id") int id,@Param("phoneNum") String phoneNum);
 
 }

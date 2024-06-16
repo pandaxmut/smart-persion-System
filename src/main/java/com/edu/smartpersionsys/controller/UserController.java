@@ -25,6 +25,8 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
+    private UserMapper userMapper;
+    @Autowired
     private OlderService olderService;
     @Autowired
     private VolunteerService volunteerService;
@@ -48,6 +50,10 @@ public class UserController {
             if(!userService.isSameByNameAndRole(user)){
                 //注册
                 boolean register = userService.register(user);
+                User u = userMapper.selectByNameAndRole(user);
+                //获取新注册用户的userId；作用：跳转到/bind中绑定手机号
+                model.addAttribute("userId",u.getUserId());
+
                 if(register){
                     model.addAttribute("msg","注册成功");
                 }else{
@@ -61,7 +67,7 @@ public class UserController {
             model.addAttribute("msg","账号密码不一致");
         }
 
-        return "login";
+        return "bind";
     }
 
 
@@ -116,6 +122,7 @@ public class UserController {
         session.removeAttribute("user");
         return "login";
     }
+
 
 
 

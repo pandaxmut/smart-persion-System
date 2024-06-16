@@ -50,6 +50,13 @@
     <select id="getOutgoings" resultMap="getOutgoingsResultMap">
         select  * from outgoing join older on outgoing.older_id=older.older_id
     </select>
+
+<!--    List<Outgoing> findByName(@Param("name") String name);-->
+    <select id="findByName" resultMap="getOutgoingsResultMap">
+        select  * from outgoing join older on outgoing.older_id=older.older_id
+        where older_name=#{name}
+    </select>
+
     <delete id="del" parameterType="java.lang.Integer">
         delete from outgoing where outgoing.id=#{id}
     </delete>
@@ -58,4 +65,5 @@
         values(#{id},#{olderId},#{startTime},#{endTime},
                #{reason},#{status})
     </insert>
+
 </mapper>

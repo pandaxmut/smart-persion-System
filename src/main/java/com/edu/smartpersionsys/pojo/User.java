@@ -9,6 +9,7 @@ public class User implements Serializable {
     private String userEmail;     //用户邮箱（用户账号）
     private String userRole;      //用户角色
     private String userStatus;    //用户状态
+    private String userPhoneNum; //联系电话
 
     public Integer getUserId() {
         return userId;
@@ -56,5 +57,13 @@ public class User implements Serializable {
 
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public String getUserPhoneNum() {
+        return userPhoneNum;
+    }
+
+    public void setUserPhoneNum(String userPhoneNum) {
+        this.userPhoneNum = userPhoneNum;
     }
 }

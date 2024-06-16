@@ -15,7 +15,6 @@ public class Outgoing {
     public Outgoing(int id, int olderId, String startTime, String endTime, String reason,String status) {
         this.id = id;
         this.olderId = olderId;
-
         this.startTime = startTime;
         this.endTime = endTime;
         this.reason = reason;

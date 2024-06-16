@@ -62,6 +62,7 @@ public class homeController {
         }
         dataFromBackend.setLabels(label);
         dataFromBackend.setValues(data);
+        //将dataFromBackend转化成json格式的数据
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonData = objectMapper.writeValueAsString(dataFromBackend);
         return jsonData;

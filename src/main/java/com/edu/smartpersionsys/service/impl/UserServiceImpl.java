@@ -50,4 +50,11 @@ public class UserServiceImpl implements UserService {
         if (userMapper.selectByNameAndRole(user)!=null) return true;
         return false;
     }
+
+    @Override
+    public boolean bindPhone(int id,String phoneNum) {
+        int i = userMapper.insertPhoneNum(id, phoneNum);
+        if (i==1) return true;
+        else return false;
+    }
 }

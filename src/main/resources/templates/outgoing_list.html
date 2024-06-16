@@ -91,10 +91,10 @@
 
         <div class="page-body">
             <div class="container">
-                <form th:action="@{/old}" method="post">
+                <form th:action="@{/outgoingSearch}" method="post">
                     <div class="row col-6">
                         <div class="input-group my-2 ">
-                            <input type="text" name="findOlderName" class="form-control" placeholder="Search for…">
+                            <input type="text" name="name" class="form-control" placeholder="Search for…">
                             <button type="submit" class="btn">Go!</button>
                         </div>
                     </div>
@@ -367,6 +367,10 @@
         </div>
     </div>
 </div>
+
+<script th:if="${msg} == '0'" type="text/javascript">
+    alert("查无此人外出记录！")
+</script>
 </body>
 </html>
 

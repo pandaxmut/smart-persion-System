@@ -28,4 +28,28 @@ public class Symptoms {
         this.symptomName = symptomName;
         this.count = count;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getSymptomName() {
+        return symptomName;
+    }
+
+    public void setSymptomName(String symptomName) {
+        this.symptomName = symptomName;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 }

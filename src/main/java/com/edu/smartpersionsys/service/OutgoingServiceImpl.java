@@ -32,6 +32,12 @@ public class OutgoingServiceImpl implements OutgoingService {
         else
             return false;
     }
+
+    @Override
+    public List<Outgoing> findByName(String name) {
+        List<Outgoing> q = outgoingMapper.findByName(name);
+        return q;
+    }
 //    @Override
 //    public boolean Update(Outgoing outgoing){
 //        int i=outgoingMapper.Update(outgoing);

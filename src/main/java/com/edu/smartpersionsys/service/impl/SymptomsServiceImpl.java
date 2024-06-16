@@ -30,14 +30,16 @@ public class SymptomsServiceImpl implements SymptomsService {
         //获取六个数据：前五名的数据+其他（前五名之后）
         List<Symptoms> newList = new ArrayList<>();
         Symptoms listPart = new Symptoms("其他",0);
+        int scount=0;
         for(int i=0;i<list.size();i++){
             if(i<5){
                 newList.add(list.get(i));
             }else{
-                listPart.setCount(listPart.getCount()+ list.get(i).getCount());
+                scount += list.get(i).getCount();
             }
         }
-        listPart.setSymptomName("其他");
+        listPart.setCount(scount);
+        System.out.println(listPart);
         newList.add(listPart);
         System.out.println(newList.toString());
         return newList;

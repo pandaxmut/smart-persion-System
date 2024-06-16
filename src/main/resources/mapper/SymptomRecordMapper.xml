@@ -12,7 +12,7 @@
     <select id="getSymptomNameAndCountByDate" resultType="symptoms">
         SELECT symptom_name,COUNT(*) AS count
         FROM symptom_record
-        WHERE date = '2024-05-20'
+        WHERE DATE(date) BETWEEN '2024-05-19' AND '2024-05-20'
         GROUP BY symptom_name
         ORDER BY count DESC
     </select>

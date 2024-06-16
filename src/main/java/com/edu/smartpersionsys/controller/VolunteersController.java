@@ -60,7 +60,6 @@ public class VolunteersController {
                 model.addAttribute("findMsg","0");
             }
         }
-
         model.addAttribute("page", all);
         model.addAttribute("path", "/schedule?pageIndex=");
         return "schedule";

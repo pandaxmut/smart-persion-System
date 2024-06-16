@@ -9,4 +9,6 @@ public interface OutgoingService {
     boolean Del(int id);
     boolean Add(Outgoing outgoing);
 //    boolean Update(Outgoing outgoing);
+
+    List<Outgoing> findByName(String name);
 }
