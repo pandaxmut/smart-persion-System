@@ -23,10 +23,8 @@ public class CaseFileServiceImpl implements CaseFileService {
     }
 
 
-
-
     @Override
-    public CaseFile findById(@Param("id") int olderId) {
+    public List<CaseFile> findById(int olderId) {
         return caseFileMapper.findById(olderId);
     }
 

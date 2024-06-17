@@ -60,9 +60,12 @@ public class CaseController {
     }
 
     @RequestMapping("/getById")
-    public String getCaseFileById(int olderId) {
-        caseFileService.findById(olderId);
-        return "redirect:/case";
+    public String getCaseFileById(@RequestParam("olderId") int olderId,Model model) {
+        System.out.println("olderId:"+olderId);
+        List<CaseFile> casefile = caseFileService.findById(olderId);
+        casefile.forEach(System.out::println);
+        model.addAttribute("casefile", casefile);
+        return "CaseFile";
     }
 
     @RequestMapping("/page")

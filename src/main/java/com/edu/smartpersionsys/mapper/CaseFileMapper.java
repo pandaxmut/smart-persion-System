@@ -9,8 +9,8 @@ import java.util.List;
 public interface CaseFileMapper {
 
     //根据id查询
-    @Select("select * from casefile where older_id=#{id}")
-    CaseFile findById(@Param("id") int olderId);
+    @Select("select * from casefile where older_id=#{olderId}")
+    List<CaseFile> findById(@Param("olderId") int olderId);
     //查询所有数据
     @Select("select * from casefile")
     List<CaseFile> findALL();
@@ -29,7 +29,7 @@ public interface CaseFileMapper {
     @Update("update casefile set older_id=#{olderId}, diagnosis=#{diagnosis}, treatment=#{treatment}, record_date=#{recordDate}, name=#{name}, idcard=#{idCard} where older_id=#{olderId}")
     int updateById(CaseFile caseFile);
 
-    @Select("select * from casefile where olderID=#{id}")
+    @Select("select * from casefile where older_id=#{id}")
     List<CaseFile> queryAllByPage();
 
 }

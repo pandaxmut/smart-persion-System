@@ -9,7 +9,7 @@ public interface CaseFileService {
     //获取所有的病例档案
     List<CaseFile> getAllCase();
 
-    CaseFile findById(int olderId);
+    List<CaseFile> findById(int olderId);
     //修改病例
     int updateById(CaseFile caseFile);
     //根据id删除病例档案

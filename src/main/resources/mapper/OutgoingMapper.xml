@@ -48,7 +48,7 @@
 
     <!--    List<Outgoing> getOutgoings()-->
     <select id="getOutgoings" resultMap="getOutgoingsResultMap">
-        select  * from outgoing join older on outgoing.older_id=older.older_id
+        select * from outgoing join older on outgoing.older_id=older.older_id
     </select>
 
 <!--    List<Outgoing> findByName(@Param("name") String name);-->
@@ -61,9 +61,10 @@
         delete from outgoing where outgoing.id=#{id}
     </delete>
     <insert id="insert" parameterType="com.edu.smartpersionsys.pojo.Outgoing">
-        insert into outgoing (id,older_id,start_time,end_time,reason,status)
-        values(#{id},#{olderId},#{startTime},#{endTime},
+        insert into outgoing (older_id,start_time,end_time,reason,status)
+        value(#{olderId},#{startTime},#{endTime},
                #{reason},#{status})
     </insert>
 
 </mapper>
+

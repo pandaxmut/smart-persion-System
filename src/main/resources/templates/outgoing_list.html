@@ -338,21 +338,19 @@
 <!--模态框组件 新增外出记录-->
 <div class="modal modal-blur fade" id="modal-addOutgoing" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form action="/add" method="post" th:object="${outgoing}">
+        <form th:action="@{/outgoing/add}" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">新增外出记录</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="model-body">
-                    <label>ID:</label>
-                    <input class="form-control" type="text" name="id">
                     <label>old_Id:</label>
                     <input class="form-control" type="text" name="olderId">
                     <label>外出开始时间:</label>
-                    <input class="form-control" type="datetime-local" name="startTime">
+                    <input class="form-control" type="date" name="startTime">
                     <label>外出结束时间:</label>
-                    <input class="form-control" type="datetime-local" name="endTime">
+                    <input class="form-control" type="date" name="endTime">
                     <label>事由:</label>
                     <input class="form-control" type="text" name="reason">
                     <label>状态:</label>

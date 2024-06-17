@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,10 +44,11 @@ public class OutgoingController {
         model.addAttribute("outgoing",new Outgoing());
         return  new ModelAndView("add","outgoing1",model);
     }
-    @PostMapping("/add")
-    public ModelAndView add(Outgoing outgoing){
+    @PostMapping("/outgoing/add")
+    public String add(@Validated Outgoing outgoing){
+        System.out.println(outgoing);
         outgoingService.Add(outgoing);
-        return new ModelAndView("redirect:/outgoing");
+        return "redirect:/outgoing";
     }
     @PostMapping("/outgoingSearch")
     public String search(@RequestParam("name") String name, Model model){
